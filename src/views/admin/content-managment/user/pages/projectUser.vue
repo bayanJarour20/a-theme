@@ -15,7 +15,7 @@
             <template slot="headers" slot-scope="{ props }">
               {{ $t(props.column.label) }} 
             </template>
-          </a-table>
+          </a-table>    
         </b-card-body>
 </template>
 <script>
