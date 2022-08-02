@@ -1,0 +1,50 @@
+{
+  "titles": {
+    "home": "home", 
+    "user": "user",
+    "inbox": "inbox",
+    "users": "users",
+    "managers": "managers",
+    "global-settings": "global settings",
+    "content-mangment":"content-mangment",
+    "accounts":"accounts",
+    "settings": "settings",
+    "projects":"projects",
+    "commonQuestions":"commonQuestions",
+    "notifications":"notifications",
+    "category":"category",
+    "faculties":"faculties",
+    "contactUs":"contactUs",
+    "advertising":"advertising",
+    "appUsers":"appUsers"
+  },
+  "breadcrumb": {
+    "home": "home",
+    "user": "user",
+    "accounts":"accounts",
+    "inbox": "inbox",
+    "settings": "settings",
+    "projects":"projects",
+    "commonQuestions":"commonQuestions",
+    "notifications":"notifications",
+    "category":"category",
+    "contactUs":"contactUs",
+    "advertising":"advertising",
+    "faculties":"faculties",
+    "appUsers":"appUsers"
+  },
+  "files": {
+    "title": "(drag and drop) or click to upload"
+  },
+  "readMore": "read more",
+  "ok": "save",
+  "edit": "update",
+  "delete": "delete",
+  "details": "details",
+  "back": "cansel",
+  "cancel": "cancel",
+  "empty": "no items was found",
+  "choose-item": "choose item",
+
+  "src": "image"
+}
