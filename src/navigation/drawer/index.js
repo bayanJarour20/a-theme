@@ -52,13 +52,25 @@ export default [
     to: '/admin/advertising',
     title: 'advertising',
     roles:[All],
-    icon: "card-account-mail",
+    icon: "chat",
   },
   {
     to: '/admin/faculties',
     title: 'faculties',
     roles:[All],
-    icon: "building",
+    icon: "domain",
+  },
+  {
+    to: '/admin/career',
+    title: 'career',
+    roles:[All],
+    icon: "account-hard-hat ",
+  },
+  {
+    to: '/admin/courses',
+    title: 'courses',
+    roles:[All],
+    icon: "movie-edit ",
   },
   {
     header: "global-settings",

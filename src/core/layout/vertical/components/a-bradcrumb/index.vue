@@ -23,6 +23,7 @@
         </b-list-group>
       </template>
     </a-drop-down>
+    
     <b-row >
       <b-col cols="12" lg="6" class="d-flex align-items-center">
         <b-breadcrumb class="px-0 py-0 m-0 rounded-0">
@@ -35,10 +36,23 @@
           >
         </b-breadcrumb>
       </b-col>
-      <b-col cols="12" lg="6">
-        <slot></slot>
+      <b-col cols="12" lg="6" class="d-flex">
+        <span class="mr-3  border-primary px-2 rounded" style="cursor: pointer; position: relative;">
+          <i
+            class="mdi text-primary toggle-collased mdi-bell-ring"
+            @click="toggleCollapse()"
+          
+          ></i>
+          <!-- <span class="border border-primary rounded px-1 " >
+            0
+          </span> -->
+        </span>
+        <div style="width:100%;" >
+        <slot ></slot>
+        </div>
       </b-col>
     </b-row>
+    
   </div>
   </div>
   

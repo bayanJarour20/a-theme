@@ -303,5 +303,49 @@ export default [
       ],
     }),
   },
+  {
+    path: "career",
+    name: "admin career",
+    components: {
+      default: () => import("@/views/admin/content-managment/career"),
+      action: () =>
+        import(
+          "@/views/admin/content-managment/career/components/create-career.vue"
+        ),
+        
+    },
+    meta: () => ({
+      layout: "vertical",
+      roles: [All],
+      breadcrumb: [
+        {
+          text: "advertising",
+          active: true,
+        },
+      ],
+    }),
+  },
+  {
+    path: "courses",
+    name: "admin courses",
+    components: {
+      default: () => import("@/views/admin/content-managment/courses"),
+      action: () =>
+        import(
+          "@/views/admin/content-managment/courses/components/create-course.vue"
+        ),
+        
+    },
+    meta: () => ({
+      layout: "vertical",
+      roles: [All],
+      breadcrumb: [
+        {
+          text: "advertising",
+          active: true,
+        },
+      ],
+    }),
+  },
  
 ];

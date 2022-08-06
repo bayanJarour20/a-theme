@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-end">
+  <div class="d-flex justify-content-end ">
     <a-input-group
     
       class="mr-2"

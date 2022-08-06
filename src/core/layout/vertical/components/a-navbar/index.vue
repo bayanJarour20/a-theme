@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar-container d-flex align-items-center p-3 border-bottom">
+  <div class="navbar-container d-flex align-items-center p-3 border-bottom" >
     <span class="mr-3 border border-primary px-2 rounded" style="cursor: pointer">
       <i
         class="mdi text-primary toggle-collased"

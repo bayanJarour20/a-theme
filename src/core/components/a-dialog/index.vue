@@ -1,5 +1,5 @@
 <template>
-<div>
+<div >
     <slot name="activator">
        <activaitor @ok="is = true" @search="search" :placeholder="placeholder" :title="btn_title"/>
     </slot>
