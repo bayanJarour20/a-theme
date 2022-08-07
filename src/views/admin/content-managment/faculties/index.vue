@@ -8,7 +8,7 @@
             @delete-selected="fireDeleteEvent"
         >
         </a-table>
-        <createFacultie ref="editFacultieDialog" title="تعديل كلية" isEdit />
+        <createFacultie ref="editFacultieDialog" title="edit faculties" isEdit />
     </div>
 </template>
 <script>
@@ -25,16 +25,16 @@ export default {
     data: () => ({
         columns: [
             {
-                label: "اسم الكلية",
+                label: "faculitiesName",
                 field: "name"
             },
             {
-                label: "عدد السنوات",
+                label: "faultiesAddres",
                 field: "numberOfYear",
-                type: 'number'
+               
             },
             {
-                label: "تفاصيل",
+                label: "details",
                 field: "details",
                 sortable: false
             }
@@ -42,29 +42,24 @@ export default {
         facultiesListList:[
             {
                
-                name:"ss",
-                numberOfYear:33
+                name:"xford",
+                numberOfYear:"london"
 
             },
              {
                
-                name:"ss",
-                numberOfYear:33
+                name:"salalh",
+                numberOfYear:"albahren"
 
             }
             ,
              {
                
-                name:"ss",
-                numberOfYear:33
+                name:"newyork",
+                numberOfYear:"washonton"
 
             },
-             {
-               
-                name:"ss",
-                numberOfYear:33
 
-            }
         ]
     }),
     // created() {

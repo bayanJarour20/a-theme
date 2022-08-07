@@ -17,11 +17,11 @@
           <b-card-header class="p-1 d-flex" style="justify-content:space-between;">
             <categoriesButtonAction
               ref="editMainCategoryDialog"
-              title="تعديل التصنيف"
+              title="edit category"
             >
               <template slot="activator">
                 <b-button variant="primary" @click="openEditMainCategoryDialog"
-                  >تعديل التصنيف الرئيسي</b-button
+                  >edit main category</b-button
                 >
               </template>
             </categoriesButtonAction>
@@ -38,7 +38,7 @@
                     isEdit = false;
                     openAddSubCategoryDialog();
                   "
-                  >إضافة تصنيف فرعي</b-button
+                  > Add a sub category</b-button
                 >
               </template>
             </subcategoriesButtonAction>
@@ -87,21 +87,21 @@ export default {
     isEdit: false,
     columns: [
       {
-        label: "التصنيفات الرئيسية",
+        label: "Main Categories",
         field: "name",
       },
       {
-        label: "التصنيفات الفرعية",
+        label: "Sub Categories",
         field: "subCategoriesCount",
         type:"number"
       },
       {
-        label: "تاريخ الإضافة",
+        label: "Added date",
         field: "dateCreated",
         sortable: false,
       },
       {
-        label: "تفاصيل",
+        label: "details",
         field: "details",
 
         sortable: false,
@@ -124,17 +124,17 @@ export default {
     subColumns: [
       {
         id:3,
-        label: "التصنيفات الفرعية",
+        label: "Sub Categories",
         field: "name",
       },
       {
         id:4,
-        label: "تاريخ الإضافة",
+        label: "Added date",
         field: "dateCreated",
         sortable: false,
       },
       {
-        label: "تفاصيل",
+        label: "details",
         field: "details",
 
         sortable: false,

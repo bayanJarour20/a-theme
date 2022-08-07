@@ -5,7 +5,7 @@
         <b-card-header>
           <strong>
             <i
-              class="mdi mdi-delete-empty"
+              class="mdi mdi-subtitles-outline"
               style="margin-left: 10px; margin-top: 4px"
             ></i>
             Rivira
@@ -22,10 +22,10 @@
         <b-card-header>
           <strong>
             <i
-              class="mdi mdi-delete-empty"
+              class="mdi mdi-menu"
               style="margin-left: 10px; margin-top: 4px"
             ></i>
-            Rivira تفاصيل مشروع
+            details project Rivira  
           </strong>
         </b-card-header>
         <b-card-body>
@@ -38,7 +38,7 @@
                 </label>
                 <label style="width: 100%">
                   execution time
-                  <div class="label-input">8أيام</div>
+                  <div class="label-input">8 days</div>
                 </label>
                 <label style="width: 100%"
                   >projectOwner
@@ -55,15 +55,15 @@
                   <div class="label-input">14</div>
                 </label>
                 <label style="width: 100%">
-                  تاريخ بداية المشروع
+                  project start date
                   <div class="label-input">2022/4/12</div>
                 </label>
                 <label style="width: 100%">
-                  تاريخ التسليم
+                   delivery date
                   <div class="label-input">2022/4/12</div>
                 </label>
                 <label style="width: 100%">
-                  تاريخ نهاية المشروع
+                  maximum project end date
                   <div class="label-input">2022/4/12</div>
                 </label>
               </b-col>
@@ -73,7 +73,7 @@
         <b-card-header>
           <strong>
             <i
-              class="mdi mdi-delete-empty"
+              class="mdi mdi-format-indent-increase"
               style="margin-left: 10px; margin-top: 4px"
             ></i>
             Category to Rivira
@@ -110,7 +110,7 @@
         <b-card-header>
           <strong>
             <i
-              class="mdi mdi-delete-empty"
+              class="mdi mdi-image-size-select-actual "
               style="margin-left: 10px; margin-top: 4px"
             ></i>
             image project
@@ -187,7 +187,7 @@
             </slide>
           </carousel>
         </b-card-body>
-        <b-card-header>
+        <!-- <b-card-header>
           <strong>
             <i
               class="mdi mdi-delete-empty"
@@ -217,24 +217,24 @@
               </div>
             </div>
           </div>
-        </section>
+        </section> -->
         <b-card-body style="display: flex; justify-content: space-between">
           <div style="display: flex">
             <b-button variant="primary" style="margin-right: 10px"
-              >حذف<i
+              >delete<i
                 class="mdi mdi-delete-empty"
                 style="margin-left: 10px; margin-top: 4px"
               ></i
             ></b-button>
             <b-button variant="primary" @click="offerProject()"
-              >عروض وتعليقات للمشروع<i
-                class="mdi mdi-delete-empty"
+              >  Project offers and comments<i
+                class="mdi mdi-comment-processing-outline "
                 style="margin-left: 10px; margin-top: 4px"
               ></i
             ></b-button>
           </div>
           <b-button variant="primary"
-            >رجوع<i
+            >back<i
               class="mdi mdi-arrow-right"
               style="margin-left: 10px; margin-top: 4px"
             ></i
@@ -255,12 +255,12 @@
 <style>
 .tb-affect {
   position: relative;
-  width: 50%;
+  width: 100%;
       display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-image: url("https://i.pravatar.cc/150?img=58");
+    background-image: url("~@/assets/images/download (1).jpg");
     height: 300px;
         background-size: cover;
         border-radius: 20px;

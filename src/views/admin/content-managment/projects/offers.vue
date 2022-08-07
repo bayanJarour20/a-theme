@@ -3,8 +3,8 @@
     <b-row>
       <b-col cols="12" md="12" lg="12">
         <b-button-group class="m-1 mb-2">
-          <b-button variant="primary">العروض المقدمة للمشروع</b-button>
-          <b-button variant="outline-primary">تعليقات للمشروع</b-button>
+          <b-button variant="primary">Project proposals</b-button>
+          <b-button variant="outline-primary">project comments</b-button>
         </b-button-group>
         <a-v-datatable
           :headers="headers"

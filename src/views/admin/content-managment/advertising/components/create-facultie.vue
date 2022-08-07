@@ -5,8 +5,8 @@
         ref="advertisingDialog"
         @ok="submit()"
         :title="title"
-        :placeholder="!isEdit ? 'ابحث عن إعلان محدد' : ''"
-        :btn_title="!isEdit ? 'إعلان جديد' : ''"
+        :placeholder="!isEdit ? 'Search for a specific advertising' : ''"
+        :btn_title="!isEdit ? 'new advertising' : ''"
         @delete="deleteadvertising(advertisingDto.id)"
         @search="search"
       >

@@ -5,14 +5,14 @@
         @ok="submit()"
         ref="NotificationsDialog"
         :placeholder="!isEdit ? 'search for Notifications' : ''"
-        :title="!isEdit ? 'إشعار جديد' : 'تعديل إشعار'"
-        :btn_title="!isEdit ? 'إشعار جديد' : ''"
+        :title="!isEdit ? ' new notification ' : 'edit notification'"
+        :btn_title="!isEdit ? ' new notification ' : ''"
       >
         <template #body>
           <a-input-text
-            label="عنوان الإشعار"
+            label="notification addres"
             name="Quetionname"
-            placeholder="عنوان الإشعار"
+            placeholder="notification addres"
             :rules="[
               {
                 type: 'required',
@@ -21,9 +21,9 @@
             ]"
           ></a-input-text>
           <a-input-textarea
-            label="نص الإشعار"
+            label="text notification"
             name="Quetionname"
-            placeholder="نص الإشعار"
+            placeholder=" text notification"
             :rules="[
               {
                 type: 'required',
@@ -44,7 +44,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: () => "إضافة إشعار",
+      default: () => "add notification",
     },
     isEdit: Boolean,
     id: Number,

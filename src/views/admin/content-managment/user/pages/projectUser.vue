@@ -1,11 +1,11 @@
 <template>
   <b-card-body class="d-flex" style="flex-direction: column">
           <b-button-group class="m-1 mb-2">
-            <b-button variant="primary">المشاريع التي عمل عليها</b-button>
+            <b-button variant="primary">Projects he worked on</b-button>
             <b-button variant="outline-primary"
-              >المشاريع التي يعمل عليها</b-button
+              >The projects he works on</b-button
             >
-            <b-button variant="outline-primary">المشاريع تاتي عمل عليها ولم تتم</b-button>
+            <b-button variant="outline-primary">Projects he worked on and did not complete</b-button>
           </b-button-group>
           <a-table
             :items="projectList"
@@ -23,27 +23,27 @@ export default {
   data:()=>({
     projectColumn: [
       {
-        label: "اسم المشروع",
+        label: "projectName",
         field: "name",
       },
       {
-        label: "اسم صاحب المشروع",
+        label: "Project owner name",
         field: "nameOwnerProject",
       },
       {
-        label: "اسم المستخدم",
+        label: "userName",
         field: "nameDepentent",
       },
       {
-        label: "تاريخ بداية المشروع",
+        label: "Project start date",
         field: "dateStartProject",
       },
       {
-        label: "تاريخ نهاية المشروع",
+        label: "Project end date",
         field: "dateEndProject",
       },
       {
-        label: "تفاصيل",
+        label: "details",
         field: "details",
         sortable: false,
       },

@@ -5,7 +5,7 @@
         <b-card-header>
           <strong>
             <i
-              class="mdi mdi-account-tie"
+              class="mdi mdi-account-tie text-primary"
               style="margin-left: 10px; margin-top: 4px"
             ></i>
             DANIEL DEN
@@ -53,47 +53,47 @@
                   style="justify-content: space-between; width: 50%"
                 >
                   <div class="d-flex">
-                    <label>سوريا</label>
-                    <i class="mdi mdi-map-marker"></i>
+                    <i class="mdi mdi-map-marker mr-1 text-primary"></i>
+                    <label>syria</label>
                   </div>
                   <div>
+                    <i class="mdi mdi-card-account-mail mr-1 text-primary"></i>
                     <label>300</label>
-                    <i class="mdi mdi-card-account-mail"></i>
                     <!-- <i class="mdi mdi-briefcase"></i> -->
                   </div>
                   <div class="d-flex">
-                    <label>مستقل</label>
-                    <i class="mdi mdi-account"></i>
+                    <i class="mdi mdi-account mr-1 text-primary"></i>
+                    <label>independent</label>
                   </div>
                 </div>
                 <div class="d-flex my-3 justify-center">
                   <span
                     class="border p-2 mx-2 border-primary"
                     style="border-radius: 50%"
-                    >مهندس مدني</span
+                    >UI/UX</span
                   >
                   <span
                     class="border p-2 mx-2 border-primary"
                     style="border-radius: 50%"
-                    >مهندس مدني</span
+                    >vue</span
                   >
                   <span
                     class="border p-2 mx-2 border-primary"
                     style="border-radius: 50%"
-                    >مهندس مدني</span
+                    >React</span
                   >
                   <span
                     class="border p-2 mx-2 border-primary"
                     style="border-radius: 50%"
-                    >مهندس مدني</span
+                    >GitHub</span
                   >
                 </div>
                 <div>
-                  <i class="mdi mdi-star"></i>
-                  <i class="mdi mdi-star"></i>
-                  <i class="mdi mdi-star"></i>
-                  <i class="mdi mdi-star"></i>
-                  <i class="mdi mdi-star"></i>
+                  <i class="mdi mdi-star text-primary"></i>
+                  <i class="mdi mdi-star text-primary"></i>
+                  <i class="mdi mdi-star text-primary"></i>
+                  <i class="mdi mdi-star text-primary"></i>
+                  <i class="mdi mdi-star text-primary"></i>
                 </div>
               </b-card-text>
             </b-col>
@@ -101,24 +101,19 @@
           <b-card-header>
             <strong>
               <i
-                class="mdi mdi-delete-empty"
+                class="mdi mdi-information text-primary"
                 style="margin-left: 10px; margin-top: 4px"
               ></i>
               About Him
             </strong>
           </b-card-header>
           <b-card-body>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content. Some quick example text to build on the
-            card title and make up the bulk of the card's content. Some quick
-            example text to build on the card title and make up the bulk of the
-            card's content. Some quick example text to build on the card title
-            and make up the bulk of the card's content.
+            Front-end developers create the user interface (UI) that determines what each part of a site or application does and how it will look.If someone wanted to build a website, for example, they might hire a front-end developer to create the site's layout. The front-end developer determines where to place images, what the navigation should look like, and how to present the site. Much of their work involves ensuring the appearance and layout of the site or application is easy to navigate and intuitive for the user.
           </b-card-body>
           <b-card-header>
             <strong>
               <i
-                class="mdi mdi-delete-empty"
+                class="mdi  mdi-sign-real-estate text-primary"
                 style="margin-left: 10px; margin-top: 4px"
               ></i>
               statistics
@@ -145,7 +140,7 @@
           <b-card-header>
             <strong>
               <i
-                class="mdi mdi-delete-empty"
+                class="mdi mdi-briefcase text-primary "
                 style="margin-left: 10px; margin-top: 4px"
               ></i>
               his Works
@@ -167,7 +162,7 @@
           <b-card-header>
             <strong>
               <i
-                class="mdi mdi-delete-empty"
+                class="mdi mdi-text-box-multiple text-primary "
                 style="margin-left: 10px; margin-top: 4px"
               ></i>
               documentation
@@ -186,18 +181,18 @@
                   "
                 >
                   <label style="width: 100%; padding-bottom: 20px"
-                    >رقم الجوال
+                    >Mobile number
                     <div class="label-input">0967456900</div>
                   </label>
                   <label style="width: 100%; text-align: center">
-                    image جواز السفر
+                    passport photo
                   </label>
                   <div class="tb-affect">
                     <b-button
                       class="b-affect"
                       v-b-modal.modal-center
                       variant="primary"
-                      ><i class="mdi mdi-plus"></i>
+                      ><i class="mdi mdi-magnify-plus "></i>
                     </b-button>
                   </div>
                   <b-modal
@@ -209,7 +204,7 @@
                   >
                     <b-img
                       style="width: 100%"
-                      src="https://i.pravatar.cc/150?img=58"
+                      src="~@/assets/images/images (1).jpg"
                     ></b-img>
                   </b-modal>
                 </b-col>
@@ -223,45 +218,31 @@
                   "
                 >
                   <label style="width: 100%; padding-bottom: 20px"
-                    >البريد الإلكتروني
+                    >E-mail
                     <div class="label-input">Bayan.jarour20@gmail.com</div>
                   </label>
                   <label style="width: 100%; text-align: center">
-                    image passWord
+                    ID photo
                   </label>
-                  <div class="tb-affect">
+                  <div class="tb-affect tp-photo">
                     <b-button
                       class="b-affect"
                       v-b-modal.modal-center
                       variant="primary"
-                      ><i class="mdi mdi-plus"></i>
+                      ><i class="mdi mdi-magnify-plus"></i>
                     </b-button>
                   </div>
                 </b-col>
                 <label style="width: 100%; padding-bottom: 20px"
-                  >عنوان المستخدم
-                  <div class="label-input">سوريا حلب</div>
+                  >User Addres
+                  <div class="label-input">syria Aleppo</div>
                 </label>
-                <div>
-                  {{ currentPage }} / {{ pageCount }}
-                  <pdf
-                    v-for="i in numPages"
-                    :key="i"
-                    :src="src"
-                    :page="i"
-                    style="display: inline-block; width: 25%"
-                  ></pdf>
+                <div style="width:100%;">
                   <a-input-file
-                    label="تابع للتصنيف الرئيسي"
-                    placeholder="اختر تابع للتصنيف الرئيسي"
-                    :rules="[
-                      {
-                        type: 'required',
-                        message: 'اختر تابع للتصنيف الرئيسي',
-                      },
-                    ]"
-                    name="categoriesList"
-                  />
+                      label="CV link..."
+                      required
+                      title="Download CV link pdf"
+                    ></a-input-file>
                 </div>
               </b-row>
             </b-col>
@@ -270,7 +251,7 @@
         <b-card-body style="display: flex; justify-content: space-between">
           <div class="d-flex">
             <b-button variant="primary"
-              >حذف<i
+              >delete<i
                 class="mdi mdi-delete-empty"
                 style="margin-left: 10px; margin-top: 4px"
               ></i
@@ -279,11 +260,11 @@
               variant="primary"
               style="margin-left: 10px"
               @click="detailsProject"
-              >مشاريع المستخدم
+              >User projects
             </b-button>
           </div>
           <b-button variant="primary"
-            >رجوع<i
+            >back<i
               class="mdi mdi-arrow-right"
               style="margin-left: 10px; margin-top: 4px"
             ></i></b-button
@@ -300,10 +281,15 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-image: url("https://i.pravatar.cc/150?img=58");
+  background-image: url("~@/assets/images/images.jpg");
   height: 300px;
   background-size: cover;
   border-radius: 20px;
+  width: 100%;
+}
+.tp-photo{
+    background-image: url("~@/assets/images/images (1).jpg")!important;
+
 }
 .b-affect {
   opacity: 0;
@@ -424,18 +410,17 @@
 
 <script>
 // import VueCarousel from "vue-carousel"
-import pdf from "vue-pdf";
-var loadingTask = pdf.createLoadingTask(
-  "https://cdn.mozilla.net/pdfjs/tracemonkey.pdf"
-);
+// import pdf from "vue-pdf";
+// var loadingTask = pdf.createLoadingTask(
+//   "https://cdn.mozilla.net/pdfjs/tracemonkey.pdf"
+// );
 
 export default {
   components: {
-    pdf,
   },
   data: () => ({
     dialog: true,
-    src: loadingTask,
+    // src: loadingTask,
     numPages: undefined,
     currentPage: 0,
     pageCount: 0,
@@ -449,11 +434,11 @@ export default {
     sliding: null,
     projectColumn: [
       {
-        label: "اسم المشروع",
+        label: "projectName",
         field: "name",
       },
       {
-        label: "تفاصيل",
+        label: "details",
         field: "details",
         sortable: false,
       },

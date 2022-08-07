@@ -17,21 +17,21 @@
           <b-row>
             <b-col cols="12" md="6">
               <a-input-text
-                label="اسم الموقع "
-                placeholder="ادخل  اسم الموقع"
+                label="Web site name "
+                placeholder="enter  Web site name"
                 name="appUserName"
                 :rules="[
-                            { type: 'required', message: ' اسم الموقع إجباري' }
+                            { type: 'required', message: ' Web site name is required' }
                         ]"
               />
             </b-col>
             <b-col cols="12" md="6">
               <a-input-text
-                label="ربح الموقع"                
+                label="earn money website"                
                 :rules="[
-                            { type: 'required', message: ' ربح الموقع إجباري' }
+                            { type: 'required', message: ' earn money website is reqired' }
                         ]"
-                        placeholder="ادخل  ربح الموقع"
+                        placeholder="enter  earn money website"
                         name="name"
               />
             </b-col>
@@ -87,7 +87,7 @@ export default {
     ],
     columns: [
       {
-        label: "name",
+        label: "cityName",
         field: "name",
       },
       // {
@@ -103,11 +103,11 @@ export default {
     isEdit: true,
     universitiesColumn: [
       {
-        label: "اسم الجامعة",
+        label: "univirisityName",
         field: "name",
       },
       {
-        label: "تفاصيل",
+        label: "details",
         field: "details",
         sortable: false,
       },
@@ -115,15 +115,15 @@ export default {
     universitiesList: [
       {
         id: 1,
-        name: "جامعة حلب",
+        name: "london",
       },
       {
         id: 1,
-        name: "جامعة حلب",
+        name: "salalh",
       },
       {
         id: 1,
-        name: "جامعة حلب",
+        name: "washonton",
       },
     ],
   }),

@@ -25,36 +25,36 @@ export default {
     data: () => ({
         columns: [
             {
-                label: "اسم المنصة",
+                label: "courseName",
                 field: "name"
             },
             {
-              label:"نوع المنصة",
+              label:"courseType",
               field:"type"
             },
             {
-                label: "تفاصيل",
+                label: "details",
                 field: "details",
                 sortable: false
             }
         ],
         facultiesListList:[
             {
-                name:"ss",
-                type:"تعليمي",
+                name:"english",
+                type:"education",
             },
              {              
-                name:"ss",
-                type:"تعليمي",
+                name:"ui/ux",
+                type:"education",
             }
             ,
              {              
-                name:"ss",
-                type:"تعليمي",
+                name:"js",
+                type:"education",
             },
              {               
-                name:"ss",
-                type:"تعليمي",
+                name:"flatter",
+                type:"education",
             }
         ]
     }),

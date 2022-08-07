@@ -21,7 +21,7 @@ export default {
     data: () => ({
         projectColumn:[
             {
-                label: "اسم المشروع",
+                label: "projectName",
                 field: "name",
             },
             {
@@ -29,23 +29,23 @@ export default {
                 field: "nameOwnerProject",
             },
             {
-              label:"اسم المستخدم",
+              label:"userName",
               field:"nameDepentent"
             },
             {
-              label:"تاريخ بداية المشروع",
+              label:"ProjectStartDate",
               field:"dateStartProject"
             },
             {
-              label:"تاريخ  التسليم",
+              label:"deliveryDate",
               field:"dateEndProject"
             },
             {
-              label:"تاريخ الحد الأعظمي لنهاية المشروع",
+              label:"maximumProjectEndDate",
               field:"dateEndProject"
             },
             {
-                    label: "تفاصيل",
+                    label: "details",
                     field: "details",
                     sortable: false
             }

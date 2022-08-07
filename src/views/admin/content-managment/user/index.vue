@@ -23,28 +23,28 @@ export default {
     data: () => ({
         personColumn:[
             {
-              label: "صورة المستخدم",
+              label: "UserPhoto",
               field: "src",
               sortable: false
             },
             {
-                label: "اسم المستخدم",
+                label: "UserName",
                 field: "name",
             },
             {
-              label:"تصنيف المستخدم",
+              label:"UserCategory",
               field:"categoryName"
             },
             {
-                label: "عمله",
+                label: "UserWork",
                 field: "work",
             },
             {
-              label:"مدينته",
+              label:"UserCity",
               field:"Hiscity"
             },
             {
-                    label: "تفاصيل",
+                    label: "details",
                     field: "details",
                     sortable: false
             }
@@ -54,7 +54,7 @@ export default {
                 id:1,
                  src: "https://randomuser.me/api/portraits/men/6.jpg",
                 name: "Elina joee",
-                categoryName:"مستقل",
+                categoryName:"independent",
                 work: "frontEnd",
                 Hiscity:"londn",
                 isActive: true, 
@@ -63,8 +63,8 @@ export default {
                 id:2,
                 src: "https://randomuser.me/api/portraits/men/7.jpg",
                 name: "karolin joee",
-                categoryName:"صاحب مشروع",
-                work: "رئيس شركة دواجن",
+                categoryName:"project owner",
+                work: "BackEnd",
                 Hiscity:"londn",
                 isActive: true, 
             },
@@ -72,9 +72,9 @@ export default {
                 id:3,
                 src: "https://randomuser.me/api/portraits/men/7.jpg",
                 name: "Olivar joee",
-                categoryName:"صاحب مشروع ومستقل",
+                categoryName:"independent and project owner",
                 work: "Flatter",
-                Hiscity:"londn",
+                Hiscity:"LEBANON",
                 isActive: true, 
             },
         ],

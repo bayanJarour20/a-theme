@@ -14,7 +14,7 @@
         <div class="d-flex">
           <div style="display: flex; padding-top: 8px">
             <b-form-checkbox></b-form-checkbox>
-            <small style="padding-top: 5px">تحديد الكل</small>
+            <small style="padding-top: 5px">select all</small>
           </div>
         </div>
         <b-button

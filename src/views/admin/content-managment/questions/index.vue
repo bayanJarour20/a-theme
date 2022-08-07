@@ -2,10 +2,10 @@
     <b-row>
       <b-col cols="12" md="12" lg="12">
         <b-button-group class="m-1 mb-2">
-          <b-button variant="primary">الأسئلة الشائعة</b-button>
-          <b-button variant="outline-primary">ضمان حقوقك</b-button>
-          <b-button variant="outline-primary">شروط الإستخدام</b-button>
-          <b-button variant="outline-primary">بيان الخصوصية</b-button>
+          <b-button variant="primary">common questions</b-button>
+          <b-button variant="outline-primary">rights guarantee</b-button>
+          <b-button variant="outline-primary">Terms of use</b-button>
+          <b-button variant="outline-primary">privacy statement</b-button>
         </b-button-group>
         <a-v-datatable
           :headers="headers"
@@ -115,7 +115,7 @@ export default {
       label: "cars",
       headers: [
         {
-          label: "جواب السؤال",
+          label: "question answer",
           value: "make",
         },
         
@@ -124,7 +124,7 @@ export default {
     headers: [
        
       {
-        label: "نص السؤال",
+        label: "Question text",
         value: "name",
       },
       {
@@ -135,45 +135,44 @@ export default {
     users: [
       {
         id: 1,
-        name: "ما هي الرسوم التي يدفعها صاحب المشروع؟",
+        name: "What are the fees paid by the owner of the project?",
         cars: [
           {
             id: 1,
-            make: "يدفع صاحب المشروع رسوم وسائل الدفع فقط وهي 2.75% وفي حال قرر العميل إعادة المبالغ التي تم شحنها في حسابه فإننا نقوم بإعادة الرسوم أيضا بشكل تلقائي.",
+            make: "The project owner pays the fees for the payment methods only, which is 2.75%. If the customer decides to return the amounts shipped in his account, we also return the fees automatically.",
           },
           
         ],
       },
       {
         id: 2,
-        name: "سجلت في مستقل وأضفت مشروعاً ولكنه لم يظهر بعد، لماذا؟",
+        name: "I registered in Freelance and added a project, but it hasn't appeared yet, why?",
         
         cars: [
            {
             id: 3,
-            make: "يدفع صاحب المشروع رسوم وسائل الدفع فقط وهي 2.75% وفي حال قرر العميل إعادة المبالغ التي تم شحنها في حسابه فإننا نقوم بإعادة الرسوم أيضا بشكل تلقائي.",
+            make: "The project owner pays the fees for the payment methods only, which is 2.75%. If the customer decides to return the amounts shipped in his account, we also return the fees automatically.",
           },
         ],
       },
       {
         id: 1,
-        name: "ما هي الرسوم التي يدفعها صاحب المشروع؟",
+        name: "What are the fees paid by the owner of the project?",
         cars: [
-          {
-            id: 1,
-            make: "يدفع صاحب المشروع رسوم وسائل الدفع فقط وهي 2.75% وفي حال قرر العميل إعادة المبالغ التي تم شحنها في حسابه فإننا نقوم بإعادة الرسوم أيضا بشكل تلقائي.",
+           {
+            id: 3,
+            make: "The project owner pays the fees for the payment methods only, which is 2.75%. If the customer decides to return the amounts shipped in his account, we also return the fees automatically.",
           },
-          
         ],
       },
       {
         id: 2,
-        name: "سجلت في مستقل وأضفت مشروعاً ولكنه لم يظهر بعد، لماذا؟",
+        name: "I registered in Freelance and added a project, but it hasn't appeared yet, why?",
         
         cars: [
            {
             id: 3,
-            make: "يدفع صاحب المشروع رسوم وسائل الدفع فقط وهي 2.75% وفي حال قرر العميل إعادة المبالغ التي تم شحنها في حسابه فإننا نقوم بإعادة الرسوم أيضا بشكل تلقائي.",
+            make: "The project owner pays the fees for the payment methods only, which is 2.75%. If the customer decides to return the amounts shipped in his account, we also return the fees automatically.",
           },
         ],
       },

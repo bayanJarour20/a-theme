@@ -2,8 +2,8 @@
   <ValidationObserver ref="categoryForm">
     <a-dialog
       :title="title"
-      placeholder="ابحث عن تصنيف محدد"
-      btn_title="تصنيف جديد"
+      placeholder="Search for a specific category"
+      btn_title="new category"
       ref="mainCategoryDialog"
       @ok="addCategory"
     >

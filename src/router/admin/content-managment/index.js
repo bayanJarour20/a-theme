@@ -319,7 +319,7 @@ export default [
       roles: [All],
       breadcrumb: [
         {
-          text: "advertising",
+          text: "career",
           active: true,
         },
       ],
@@ -341,7 +341,7 @@ export default [
       roles: [All],
       breadcrumb: [
         {
-          text: "advertising",
+          text: "courses",
           active: true,
         },
       ],

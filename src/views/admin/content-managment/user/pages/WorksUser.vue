@@ -5,7 +5,7 @@
         <b-card-header>
           <strong>
             <i
-              class="mdi mdi-delete-empty"
+              class="mdi mdi-subtitles-outline"
               style="margin-left: 10px; margin-top: 4px"
             ></i>
             Rivira
@@ -22,7 +22,7 @@
         <b-card-header>
           <strong>
             <i
-              class="mdi mdi-delete-empty"
+              class="mdi mdi-format-indent-increase"
               style="margin-left: 10px; margin-top: 4px"
             ></i>
             Category to Rivira
@@ -59,7 +59,7 @@
         <b-card-header>
           <strong>
             <i
-              class="mdi mdi-delete-empty"
+              class="mdi mdi-image-size-select-actual "
               style="margin-left: 10px; margin-top: 4px"
             ></i>
             image project
@@ -124,7 +124,7 @@
             </slide>
           </carousel>
           <label style="width: 100%"
-                  >رابط المشروع
+                  >project cv
                   <div class="label-input">
                     <a
                       href="https://stackoverflow.com/questions/65879630/vuetify-storybook-remapinternalicon-issue"
@@ -136,7 +136,7 @@
         <b-card-body style="display: flex; justify-content: space-between">
 
           <b-button variant="primary"
-            >رجوع<i
+            >back<i
               class="mdi mdi-arrow-right"
               style="margin-left: 10px; margin-top: 4px"
             ></i
@@ -160,12 +160,12 @@
 }
 .tb-affect {
   position: relative;
-  width: 50%;
+ 
       display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-image: url("https://i.pravatar.cc/150?img=58");
+    background-image: url("~@/assets/images/download (1).jpg");
     height: 300px;
         background-size: cover;
         border-radius: 20px;

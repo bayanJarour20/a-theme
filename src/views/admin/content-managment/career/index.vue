@@ -25,28 +25,28 @@ export default {
     data: () => ({
         columns: [
             {
-                label: "اسم المهنة",
+                label: "careerName",
                 field: "name"
             },
             {
-                label: "تفاصيل",
+                label: "details",
                 field: "details",
                 sortable: false
             }
         ],
         facultiesListList:[
             {
-                name:"ss",
+                name:"frontEnd",
             },
              {              
-                name:"ss",
+                name:"backEnd",
             }
             ,
              {              
-                name:"ss",
+                name:"deiner",
             },
              {               
-                name:"ss",
+                name:"photoGraph",
             }
         ]
     }),
