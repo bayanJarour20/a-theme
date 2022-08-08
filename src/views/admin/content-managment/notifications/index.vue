@@ -30,10 +30,13 @@
     <div>
       <b-card no-body class="mb-1 my-3">
         <b-card-header
-          class="pl-5 pr-5 pb-0 pt-50 d-flex"
+          class=" d-flex"
           style="justify-content: space-between"
         >
+        <div>
+          <i class="mdi  mdi-bell-ring  text-primary mr-2"></i>
           <span>Material Design Icons</span>
+          </div>
           <span class="ml-auto">2/2/2022</span>
           <!-- <b-button type="button"  variant="flat-secondary" class="ml-2 rounded-circle btn-icon">
                         </b-button> -->
@@ -48,10 +51,13 @@
       </b-card>
       <b-card no-body class="mb-1 my-3">
         <b-card-header
-          class="pl-5 pr-5 pb-0 pt-50 d-flex"
+          class=" d-flex"
           style="justify-content: space-between"
         >
+          <div>
+          <i class="mdi  mdi-bell-ring  text-primary mr-2"></i>
           <span>Material Design Icons</span>
+          </div>
           <span class="ml-auto">2/2/2022</span>
           <!-- <b-button type="button"  variant="flat-secondary" class="ml-2 rounded-circle btn-icon">
                         </b-button> -->
@@ -66,10 +72,13 @@
       </b-card>
       <b-card no-body class="mb-1 my-3">
         <b-card-header
-          class="pl-5 pr-5 pb-0 pt-50 d-flex"
+          class=" d-flex"
           style="justify-content: space-between"
         >
+          <div>
+          <i class="mdi  mdi-bell-ring  text-primary mr-2"></i>
           <span>Material Design Icons</span>
+          </div>
           <span class="ml-auto">2/2/2022</span>
           <!-- <b-button type="button"  variant="flat-secondary" class="ml-2 rounded-circle btn-icon">
                         </b-button> -->

@@ -8,7 +8,7 @@
                             <b-col cols="12" md="4">
                                 <a-input-text
                                     v-model="feedbackDto.appUserName"
-                                    label="اسم المستخدم "
+                                    label="user name"
                                     readonly
                                     name="appUserName"
                                 />
@@ -20,7 +20,7 @@
                                             'MMMM Do YYYY, h:mm:ss a'
                                         )
                                     "
-                                    label="تاريخ الإرسال"
+                                    label="send date"
                                     readonly
                                     name="sendDate"
                                 />
@@ -36,8 +36,8 @@
                                                   'MMMM Do YYYY, h:mm:ss a'
                                               )
                                     "
-                                    label="تاريخ الرد"
-                                    placeholder="لم يتم الرد بعد"
+                                    label="Reply date"
+                                    placeholder="No response yet"
                                     readonly
                                     name="replyDate"
                                 />
@@ -45,14 +45,14 @@
                             <b-col cols="12" class="my-1">
                                 <a-input-text
                                 v-model="feedbackDto.title"
-                                    label="عنوان الرسالة"
+                                    label="message title"
                                     readonly
                                     name="title"
                                 />
                             </b-col>
                             <b-col cols="12" class="my-1">
                                 <a-input-textarea
-                                    label="الرسالة"
+                                    label="message"
                                     readonly
                                     name="body"
                                     v-model="feedbackDto.body"
@@ -61,14 +61,14 @@
                             <b-col cols="12" class="my-1">
                                 <a-input-textarea
                                 v-model="feedbackDto.reply"
-                                    label="الرد على الرسالة"
+                                    label="reply to meeasage"
                                     :rules="[
                                         {
                                             type: 'required',
-                                            message: 'نص الرد مطلوب'
+                                            message: 'Reply text is required'
                                         }
                                     ]"
-                                    placeholder="يمكنك كتابة رد هنا ..."
+                                    placeholder="You can write a reply here ..."
                                     name="reply"
                                 />
                             </b-col>
@@ -84,14 +84,14 @@
                                     class="mr-1"
                                     type="submit"
                                     variant="primary"
-                                    style="max-width:100px"
-                                    >إرسال رد</b-button
+
+                                    >send reply</b-button
                                 >
                                 <b-button
                                     variant="outline-primary"
                                     style="max-width:100px"
                                     to="/contact"
-                                    >تراجع</b-button
+                                    >back</b-button
                                 >
                             </div>
                         </b-col>
@@ -105,7 +105,7 @@
                                 type="button"
                                 style="max-width:100px"
                                 variant="outline-danger"
-                                >حذف</b-button
+                                >delete</b-button
                             >
                         </b-col>
                     </b-row>

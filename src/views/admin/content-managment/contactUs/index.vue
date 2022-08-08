@@ -19,24 +19,24 @@ export default {
     data: () => ({
         columns: [
             {
-                label: "العنوان",
+                label: "title",
                 field: "title"
             },
             {
-                label: "النص",
+                label: "text",
                 field: "body",
                 sortable: false
             },
             {
-                label: "اسم المستخدم ",
+                label: "userName",
                 field: "appUserName"
             },
             {
-                label: "تاريخ الإرسال",
+                label: "sendDate",
                 field: "sendDate"
             },
             {
-                label: "تفاصيل",
+                label: "details",
                 field: "details",
                 sortable: false
             }
