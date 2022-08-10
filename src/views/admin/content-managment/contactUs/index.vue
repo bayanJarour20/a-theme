@@ -15,6 +15,7 @@
     </div>
 </template>
 <script>
+ import { mapActions } from 'vuex';
 export default {
     data: () => ({
         columns: [
@@ -66,7 +67,12 @@ export default {
         ]
         
     }),
+    created() {
+      this.getFeedbackDetails()
+    },
     methods: {
+              ...mapActions(["getFeedbackDetails"]),
+
         openContactDetails(props) {
             this.$router.push("contactUs/details/" + props.row.id);
         },

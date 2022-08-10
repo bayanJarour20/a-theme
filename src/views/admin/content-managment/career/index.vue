@@ -50,9 +50,10 @@ export default {
             }
         ]
     }),
-    // created() {
-    //     this.getFacultiesDetails()
-    // },
+    created() {
+        //this.getFacultiesDetails()
+        console.log("Sss")
+    },
     methods: {
         // ...mapActions(["getFacultiesDetails"]),
         openEditFaculityDialog() {

@@ -14,13 +14,16 @@
 <script>
 import createFacultie from "./components/create-facultie";
 
-// import { mapActions } from 'vuex';
+import { mapState ,mapActions } from 'vuex';
 export default {
     components: {
         createFacultie
     },
     computed: {
-        // ...mapGetters(['facultiesList'])
+      //  ...mapGetters(['faculties']),
+       ...mapState({
+            faculties: state => state.faculties.faculties,
+        }),
     },
     data: () => ({
         columns: [
@@ -62,11 +65,11 @@ export default {
 
         ]
     }),
-    // created() {
-    //     this.getFacultiesDetails()
-    // },
+    created() {
+      this.getFacultiesDetails()
+    },
     methods: {
-        // ...mapActions(["getFacultiesDetails"]),
+        ...mapActions(["getFacultiesDetails"]),
         openEditFaculityDialog() {
             // this.$store.commit('Set_Facultie_Dto', p.row)
             this.$refs.editFacultieDialog.openDialog();

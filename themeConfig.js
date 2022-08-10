@@ -2,7 +2,7 @@ export const $_themeConfig = {
   app: {
     appName: "FreeLand",
     appSubtitle: "",
-    domainPath: "https://localhost:44347/",
+    domainPath: "http://karo1234-001-site1.atempurl.com/",
     isRTL: true
   },
 };
