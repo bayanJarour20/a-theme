@@ -1,11 +1,11 @@
 <template>
     <div>       <!-- // selectedLabel --- opthinal props - default value: id -->
         <a-table
-            :items="facultiesListList"
+            :items="facultiesList"
             :columns="columns"
             selectedLabel="name"
             @details="openEditFaculityDialog"
-            @delete-selected="fireDeleteEvent"
+            @delete-selected="fireDeleteEventFaculity"
         >
         </a-table>
         <createFacultie ref="editFacultieDialog" title="edit faculties" isEdit />
@@ -22,7 +22,7 @@ export default {
     computed: {
       //  ...mapGetters(['faculties']),
        ...mapState({
-            faculties: state => state.faculties.faculties,
+            facultiesList: state => state.faculties.facultiesList,
         }),
     },
     data: () => ({
@@ -32,50 +32,23 @@ export default {
                 field: "name"
             },
             {
-                label: "faultiesAddres",
-                field: "numberOfYear",
-               
-            },
-            {
                 label: "details",
                 field: "details",
                 sortable: false
             }
         ],
-        facultiesListList:[
-            {
-               
-                name:"xford",
-                numberOfYear:"london"
-
-            },
-             {
-               
-                name:"salalh",
-                numberOfYear:"albahren"
-
-            }
-            ,
-             {
-               
-                name:"newyork",
-                numberOfYear:"washonton"
-
-            },
-
-        ]
     }),
     created() {
       this.getFacultiesDetails()
     },
     methods: {
-        ...mapActions(["getFacultiesDetails"]),
-        openEditFaculityDialog() {
-            // this.$store.commit('Set_Facultie_Dto', p.row)
-            this.$refs.editFacultieDialog.openDialog();
+        ...mapActions(["getFacultiesDetails","deleteAllFaculty"]),
+        openEditFaculityDialog(p) {
+             this.$store.commit('Set_Facultie_Dto', p.row)
+            this.$refs.editFacultieDialog.openDialog(p);
         },
-        fireDeleteEvent(list) {
-            console.log(list)
+        fireDeleteEventFaculity(list) {
+            this.deleteAllFaculty(list)
         }
     },
     beforeDestroy() {

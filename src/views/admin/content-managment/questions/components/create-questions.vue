@@ -3,34 +3,37 @@
     <b-form>
       <a-dialog
         @ok="submit()"
+        @delete="deleteQuestion(commonQuestionDto.id)"
         ref="QuestionsDialog"
-        :title="!isEdit ? 'سؤال جديد' : 'تعديل سؤال'"
+        :title="!isEdit ? 'add commonQuestion' : 'edit commonQuestion'"
         :isEdit="isEdit"
         :placeholder="!isEdit ? 'search for Qetions' : ''"
         :btn_title="!isEdit ? 'Add New Quetions' : ''"
       >
         <template #body>
           <a-input-text
-            label="نص السؤال"
+            label="question text"
             name="Quetionname"
-            placeholder="نص السؤال"
+            placeholder="question text"
             :rules="[
               {
                 type: 'required',
                 message: 'is reqired',
               },
             ]"
+            v-model="commonQuestionDto.question"
           ></a-input-text>
           <a-input-textarea
-            label="جواب السؤال"
-            name="Quetionname"
-            placeholder="جواب السؤال"
+            label="answer text"
+            name="answer name"
+            placeholder="answer text"
             :rules="[
               {
                 type: 'required',
-                message: 'is reqired',
+                message: 'answer text is reqired',
               },
             ]"
+            v-model="commonQuestionDto.answer"
           ></a-input-textarea>
         </template>
       </a-dialog> 
@@ -40,16 +43,21 @@
 
 <script>
 import { ValidationObserver } from "vee-validate";
-
+import { mapState ,mapActions } from 'vuex';
 export default {
   props: {
     isEdit: Boolean,
   },
   methods: {
+      ...mapActions(["actionQuestion", "deleteQuestion"]),
     submit() {
       this.$refs.observer.validate().then((suc) => {
         if (suc) {
-          console.log(suc);
+          this.actionQuestion({
+            id:this.commonQuestionDto.id,
+            question: this.commonQuestionDto.question,
+            answer: this.commonQuestionDto.answer,
+          });
         }
       });
     },
@@ -62,6 +70,19 @@ export default {
       }
       this.$refs.QuestionsDialog.open();
     },
+  },
+  data: () => ({
+      //  questionDto: {
+      //       id: "",
+      //       question: "",
+      //       answer: ""
+      //   },
+    
+  }),
+  computed:{
+    ...mapState({
+       commonQuestionDto: (state) => state.question.commonQuestionDto,
+    })
   },
   components: {
     ValidationObserver,

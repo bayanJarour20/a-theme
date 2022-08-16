@@ -35,18 +35,27 @@
 </template>
 
 <script>
+  import {mapActions,mapState} from "vuex"
 export default {
   props: {
     appName: String
   },
   data: () => ({
     userDto: {
-      
     }
   }),
+  computed: {
+    //  ...mapGetters(['faculties']),
+    ...mapState({
+      AccountDto: (state) => state.actionSignUp.AccountDto,
+    }),
+  },
   methods: {
+    ...mapActions(["sinUp"]),
     signup(userDto) {
       console.log(userDto)
+      Object.assign(this.AccountDto, userDto);
+      this.sinUp(userDto)
     }
   }
 }

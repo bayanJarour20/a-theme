@@ -220,12 +220,6 @@
         </section> -->
         <b-card-body style="display: flex; justify-content: space-between">
           <div style="display: flex">
-            <b-button variant="primary" style="margin-right: 10px"
-              >delete<i
-                class="mdi mdi-delete-empty"
-                style="margin-left: 10px; margin-top: 4px"
-              ></i
-            ></b-button>
             <b-button variant="primary" @click="offerProject()"
               >  Project offers and comments<i
                 class="mdi mdi-comment-processing-outline "
@@ -234,6 +228,7 @@
             ></b-button>
           </div>
           <b-button variant="primary"
+          to="admin/projects"
             >back<i
               class="mdi mdi-arrow-right"
               style="margin-left: 10px; margin-top: 4px"
@@ -329,7 +324,7 @@ hr {
 </style>
 <script>
 import { Carousel, Slide } from "vue-carousel";
-
+import {mapState} from "vuex"
 export default {
   components: {
     Carousel,
@@ -379,5 +374,10 @@ export default {
       console.log(slide);
     },
   },
+  computed:{
+     ...mapState({
+             projectDto: state => state.projects.projectDto,
+        }), 
+  }
 };
 </script>

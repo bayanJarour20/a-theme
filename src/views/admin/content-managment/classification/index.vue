@@ -1,15 +1,12 @@
 <template>
   <div>
     <a-table
-      :items="categoriesList"
+      :items="categoryList"
       :columns="columns"
       selectedLabel="name"
       @details="openCategoriesDetails"
       @delete-selected="fireDeleteEvent"
     >
-      <template slot="items.dateCreated" slot-scope="{ value }">
-        {{ new Date(value).toLocaleDateString("en-SY") }}
-      </template>
     </a-table>
     <transition name="fade">
       <div v-if="show">
@@ -18,6 +15,7 @@
             <categoriesButtonAction
               ref="editMainCategoryDialog"
               title="edit category"
+              isEdit
             >
               <template slot="activator">
                 <b-button variant="primary" @click="openEditMainCategoryDialog"
@@ -27,7 +25,7 @@
             </categoriesButtonAction>
             <subcategoriesButtonAction
               ref="subCategoryDialog"
-              :isEdit="isEdit"
+              isEdit
               :id="+id"
             >
               <template slot="activator">
@@ -46,22 +44,19 @@
         </b-card>
         <a-table
           class="mb-3"
-          :items="subcategoriesList"
+          :items="subCategoryList"
           :columns="subColumns"
           selectedLabel="name"
           @details="openEditSubCategoryDialog"
           @delete-selected="fireDeleteEvent"
         > 
-          <template slot="items.dateCreated" slot-scope="{ value }">
-            {{ new Date(value).toLocaleDateString("en-SY") }}
-          </template>
         </a-table>
       </div>
     </transition>
   </div>
 </template>
 <script>
-// import { mapActions, mapState,mapGetters } from "vuex";
+import { mapActions, mapState,mapGetters } from "vuex";
 import categoriesButtonAction from "./components/categories-button-action";
 import subcategoriesButtonAction from "./components/subcategories-button-action";
 // import { handleDashLangChange } from "@/libs/event-bus";
@@ -74,13 +69,16 @@ export default {
     id: String,
   },
   computed: {
-    // ...mapState({
-    //   categoriesDto: (state) => state.categories.categoriesDto,
-    // }),
-    // ...mapGetters([
-    //         "categoriesList",
-    //         "subcategoriesList"
-    //     ]),
+    ...mapState({
+      categoryDto: (state) => state.category.categoryDto,
+      subCategoryList:(state) => state.category.subCategoryList,
+      categoryList:(state) => state.category.categoryList,
+      subCategoryDto:(state) => state.category.subCategoryDto,
+    }),
+    ...mapGetters([
+            "categoriesList",
+            "subcategoriesList"
+        ]),
   },
   data: () => ({
     show: false,
@@ -91,66 +89,52 @@ export default {
         field: "name",
       },
       {
-        label: "Sub Categories",
-        field: "subCategoriesCount",
-        type:"number"
-      },
-      {
-        label: "Added date",
-        field: "dateCreated",
-        sortable: false,
-      },
-      {
         label: "details",
         field: "details",
 
         sortable: false,
       },
     ],
-    categoriesList:[
-      {
-        id:2,
-       name:"fullStack",
-       subCategoriesCount:"FrontEnd",
-       dateCreated:"12/12/3"
-      },
-      {
-        id:3,
-       name:"fullStack",
-       subCategoriesCount:"FrontEnd",
-       dateCreated:"12/12/3"
-      }
-    ],
+    // categoriesList:[
+    //   {
+    //     id:2,
+    //    name:"fullStack",
+    //    subCategoriesCount:"FrontEnd",
+    //    dateCreated:"12/12/3"
+    //   },
+    //   {
+    //     id:3,
+    //    name:"fullStack",
+    //    subCategoriesCount:"FrontEnd",
+    //    dateCreated:"12/12/3"
+    //   }
+    // ],
     subColumns: [
       {
-        id:3,
         label: "Sub Categories",
         field: "name",
       },
       {
-        id:4,
-        label: "Added date",
-        field: "dateCreated",
-        sortable: false,
-      },
-      {
         label: "details",
         field: "details",
 
         sortable: false,
       },
     ],
-    subcategoriesList:[
-      {
-        name:"frontEnd",
-        dateCreated:"12/34/5"
-      },
-      {
-        name:"backEnd",
-        dateCreated:"12/34/5"
-      }
-    ]
+    // subcategoriesList:[
+    //   {
+    //     name:"frontEnd",
+    //     dateCreated:"12/34/5"
+    //   },
+    //   {
+    //     name:"backEnd",
+    //     dateCreated:"12/34/5"
+    //   }
+    // ]
   }),
+  created(){
+    this.getCategoryDetails()
+  },
   mounted() {
     // this.getCategories();
     if (+this.id) {
@@ -167,35 +151,43 @@ export default {
   },
 
   methods: {
+    ...mapActions(["getCategoryDetails","getSubCategory"]),
     openCategoriesDetails(props) {
         if (props.row.id != this.id) {
+          Object.assign(this.categoryDto, props.row);
         this.$router.push("/admin/category/" + props.row.id);
+        this.getSubCategory(props.row.id)
+
       }
       this.show = true;
     },
-    openEditMainCategoryDialog() {
+    openEditMainCategoryDialog(p) {
       // this.$store.commit(
       //   "Reset_Category_Dto",
       //   this.categoriesList.find((item) => item.id == this.id)
       // );
-      this.$refs.editMainCategoryDialog.open();
+      this.$refs.editMainCategoryDialog.open(p.row);
     },
     openAddSubCategoryDialog() {
       // this.$store.commit("Reset_Sub_Category_Dto");
-      this.$refs.subCategoryDialog.open();
+      this.isEdit = false;
+      this.subCategoryDto.id=""
+      console.log(!!this.subCategoryDto.id)
+      this.$refs.subCategoryDialog.openDialog();
     },
     openEditSubCategoryDialog(props) {
       // this.$store.commit("Reset_Sub_Category_Dto", props.row);
-      console.log(props)
+      console.log(props.row)
+      Object.assign(this.subCategoryDto, props.row);
       this.isEdit = true;
-      this.$refs.subCategoryDialog.open();
+      this.$refs.subCategoryDialog.openDialog();
     },
     fireDeleteEvent(list) {
       console.log(list);
     },
   },
-  // beforeDestroy() {
-  //       this.$store.commit('Reset_Search_Dto')
-  //   }
+  beforeDestroy() {
+        this.$store.commit('Reset_Search_Dto')
+    }
 };
 </script>

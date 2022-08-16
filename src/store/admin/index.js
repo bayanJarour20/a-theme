@@ -1,6 +1,6 @@
 import global from "./global";
 import user from "./content-managment/user";
-import questions from "./content-managment/questions";
+ import question from "./content-managment/commonQuestions";
 import career from "./content-managment/career";
 import advertising from "./content-managment/advertising";
 import contactUs from "./content-managment/contactUs";
@@ -11,18 +11,19 @@ import notifications from "./content-managment/notifications";
 import projects from "./content-managment/projects";
 import settings from "./settings";
 
-
+import actionSignUp from "./actionSignUp";
 
 
 export default {
   global,
   user,
+  question,
   settings,
   faculties,
   notifications,
    projects,
   courses,
-  questions,
+  actionSignUp,
   career,
   advertising,
   contactUs,

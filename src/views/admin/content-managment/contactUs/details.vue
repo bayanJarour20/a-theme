@@ -1,5 +1,5 @@
 <template>
-    <!-- <ValidationObserver ref="observer"> -->
+    <ValidationObserver ref="observer">
         <b-form @submit.prevent="onSubmit">
             <b-card no-body class="mb-2">
                 <b-card-body>
@@ -7,7 +7,7 @@
                         <b-row>
                             <b-col cols="12" md="4">
                                 <a-input-text
-                                    v-model="feedbackDto.appUserName"
+                                    v-model="feedbackDto.senderName"
                                     label="user name"
                                     readonly
                                     name="appUserName"
@@ -16,7 +16,7 @@
                             <b-col cols="12" md="4">
                                 <a-input-text
                                     :value="
-                                        moment(feedbackDto.sendDate).format(
+                                        moment(feedbackDto.dateCreated).format(
                                             'MMMM Do YYYY, h:mm:ss a'
                                         )
                                     "
@@ -55,7 +55,7 @@
                                     label="message"
                                     readonly
                                     name="body"
-                                    v-model="feedbackDto.body"
+                                    v-model="feedbackDto.description"
                                 />
                             </b-col>
                             <b-col cols="12" class="my-1">
@@ -90,7 +90,7 @@
                                 <b-button
                                     variant="outline-primary"
                                     style="max-width:100px"
-                                    to="/contact"
+                                    to="/admin/contactUs"
                                     >back</b-button
                                 >
                             </div>
@@ -112,35 +112,46 @@
                 </b-card-footer>
             </b-card>
         </b-form>
+    </ValidationObserver>
 </template>
 <script>
 import moment from "moment";
+import { ValidationObserver } from "vee-validate";
+
+import { mapActions,mapState } from 'vuex';
 export default {
     props: {
         id: String
     },
-    // created() {
-    //     this.getFeedbackDetail(this.id);
-    // },
+    created() {
+        this.getFeedbackDetail(this.id);
+    },
     data: () => ({
-        feedbackDto:{
-          appUserName:"Bayn Jarour",
-          sendDate:"12/12/2",
-          replyDate:"",
-          title:"jjjjj",
-          body:"ghayr maelum (fi alwaedi) NavigationDuplicated: tajanub altanaqul alzaayid 'iilaa almawqie alhalii: ",
-          reply:"",
-        }
+        // feedbackDto:{
+        //   senderName:"Bayn Jarour",
+        //   dateCreated:"12/12/2",
+        //   replyDate:"",
+        //   title:"jjjjj",
+        //   description:"ghayr maelum (fi alwaedi) NavigationDuplicated: tajanub altanaqul alzaayid 'iilaa almawqie alhalii: ",
+        //   reply:"",
+        // }
     }),
+     components: {
+       ValidationObserver
+    },
     computed: {
-
+      
+      ...mapState({
+      feedbackDto: (state) => state.contactUs.feedbackDto
+    })
     },
 
     methods: {
-
+      ...mapActions(["getFeedbackDetail","actionFeedback","deleteFeedback"]),
         onSubmit() {
             this.$refs.observer.validate().then(success => {
                 if (success) {
+                    this.feedbackDto.id = this.id;
                     this.feedbackDto.replyDate = new Date();
                     this.actionFeedback(this.feedbackDto);
                 }

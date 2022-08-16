@@ -1,26 +1,28 @@
 <template>
     <div>       <!-- // selectedLabel --- opthinal props - default value: id -->
         <a-table
-            :items="facultiesListList"
+            :items="courcesList"
             :columns="columns"
-            selectedLabel="name"
-            @details="openEditFaculityDialog"
-            @delete-selected="fireDeleteEvent"
+            selectedLabel="id"
+            @details="openCourseDialog"
+            @delete-selected="fireDeleteEventCourse"
         >
         </a-table>
-        <createCourse ref="editFacultieDialog" title="تعديل اسم المنصة" isEdit />
+        <createCourse ref="courseDialog" title="edit course" isEdit />
     </div>
 </template>
 <script>
 import createCourse from "./components/create-course.vue";
-
-// import { mapActions } from 'vuex';
+ import { mapState ,mapActions } from 'vuex';
 export default {
     components: {
         createCourse
     },
     computed: {
-        // ...mapGetters(['facultiesList'])
+         ...mapState({             
+            courcesList: state => state.courses.courcesList,
+            courcesDto: state => state.courses.courcesDto,
+        })
     },
     data: () => ({
         columns: [
@@ -30,7 +32,7 @@ export default {
             },
             {
               label:"courseType",
-              field:"type"
+              field:"platformType"
             },
             {
                 label: "details",
@@ -38,37 +40,19 @@ export default {
                 sortable: false
             }
         ],
-        facultiesListList:[
-            {
-                name:"english",
-                type:"education",
-            },
-             {              
-                name:"ui/ux",
-                type:"education",
-            }
-            ,
-             {              
-                name:"js",
-                type:"education",
-            },
-             {               
-                name:"flatter",
-                type:"education",
-            }
-        ]
+ 
     }),
-    // created() {
-    //     this.getFacultiesDetails()
-    // },
+    created() {
+        this.getCourcesList()
+    },
     methods: {
-        // ...mapActions(["getFacultiesDetails"]),
-        openEditFaculityDialog() {
-            // this.$store.commit('Set_Facultie_Dto', p.row)
-            this.$refs.editFacultieDialog.openDialog();
+         ...mapActions(["getCourcesList","deleteAllCourse"]),
+        openCourseDialog(p) {
+            this.$refs.courseDialog.openDialog(p.row);
         },
-        fireDeleteEvent(list) {
-            console.log(list)
+        
+        fireDeleteEventCourse(list) {
+            this.deleteAllCourse(list)
         }
     },
     beforeDestroy() {

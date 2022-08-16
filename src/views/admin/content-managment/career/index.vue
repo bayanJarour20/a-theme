@@ -1,26 +1,28 @@
 <template>
     <div>       <!-- // selectedLabel --- opthinal props - default value: id -->
         <a-table
-            :items="facultiesListList"
+            :items="careerList"
             :columns="columns"
-            selectedLabel="name"
-            @details="openEditFaculityDialog"
-            @delete-selected="fireDeleteEvent"
+            selectedLabel="id"
+            @details="openEditCareerDialog"
+            @delete-selected=" fireDeleteEventCareer"
         >
         </a-table>
-        <createcareer ref="editFacultieDialog" title="تعديل اسم المهنة" isEdit />
+        <createcareer ref="careerDialog" title="edit name career" isEdit />
     </div>
 </template>
 <script>
 import createcareer from "./components/create-career.vue";
 
-// import { mapActions } from 'vuex';
+import { mapActions ,mapState } from 'vuex';
 export default {
     components: {
         createcareer
     },
-    computed: {
-        // ...mapGetters(['facultiesList'])
+    computed: { 
+        ...mapState({
+            careerList: state => state.career.careerList,
+        })
     },
     data: () => ({
         columns: [
@@ -51,17 +53,16 @@ export default {
         ]
     }),
     created() {
-        //this.getFacultiesDetails()
-        console.log("Sss")
+        this.getCareerDetails()
     },
     methods: {
-        // ...mapActions(["getFacultiesDetails"]),
-        openEditFaculityDialog() {
+         ...mapActions(["getCareerDetails","deleteAllCareer"]),
+        openEditCareerDialog(p) {
             // this.$store.commit('Set_Facultie_Dto', p.row)
-            this.$refs.editFacultieDialog.openDialog();
+            this.$refs.careerDialog.openDialog(p.row);
         },
-        fireDeleteEvent(list) {
-            console.log(list)
+        fireDeleteEventCareer(list) {
+            this.deleteAllCareer(list)
         }
     },
     beforeDestroy() {

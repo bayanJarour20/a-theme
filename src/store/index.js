@@ -10,7 +10,7 @@ import admin from "./admin";
 export default new Vuex.Store({
   modules: {
     app,
-
-    ...admin
+        ...admin
   },
+  
 });

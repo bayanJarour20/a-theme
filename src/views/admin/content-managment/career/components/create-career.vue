@@ -2,24 +2,24 @@
     <ValidationObserver ref="observer">
         <b-form>
             <a-dialog
-                ref="facultieDialog"
+                ref="careerDialog"
                 @ok="submit()"
                 :title="title"
                 :placeholder="!isEdit ? 'Search for a specific career' : ''"
                 :btn_title="!isEdit ? 'new career' : ''"
-                :isEdit="!!facultyDto.id"
-                @delete="deleteFaculty(facultyDto.id)"
+                :isEdit="!!careerDto.id"
+                @delete="deleteCareer(careerDto.id)"
                 @search="search"
             > 
                 <template #body>
                     <a-input-text
                         :rules="[
-                            { type: 'required', message: 'اسم المهنة إجباري' }
+                            { type: 'required', message: 'career name is reqired' }
                         ]"
-                        label="اسم المهنة"
-                        v-model="facultyDto.name"
-                        placeholder="ادخل اسم المهنة"
-                        name="name"
+                        label="career name"
+                        v-model="careerDto.name"
+                        placeholder="enter career name"
+                        name="careerName"
                     />
                 </template>
             </a-dialog>
@@ -27,83 +27,56 @@
     </ValidationObserver>
 </template>
 <script>
+import { ValidationObserver } from "vee-validate";
 
-// import { mapState, mapActions } from "vuex";
+ import { mapState, mapActions } from "vuex";
 export default {
     components: {
-       
+       ValidationObserver
     },
     props: {
         title: {
             type: String,
-            default: () => "إضافة مهنة"
+            default: () => "add career"
         },
         isEdit: Boolean
     },
      data: () => ({
-        facultyDto:{
-          id:1,
-          name:"sdsd",
-          universityId:3,
-          numberOfYear:12,
-          imagePath:[]
-            },
-            university:[
-              {
-                id:1,
-                name :"xzxz",
 
-              },{
-                id:1,
-                name:"xzxz",
-              }
-            ]
     }),  
     computed: {
-        // ...mapState({
-        //     facultyDto: state => state.faculties.facultyDto,
-        //     university: state => state.university.universities
-        // })
+        ...mapState({
+            careerDto: state => state.career.careerDto,
+        })
     },
     created() {
-        // this.fetchUniversity();
     },
     methods: {
-        // ...mapActions(["fetchUniversity", "actionFaculty", "deleteFaculty"]),
+         ...mapActions([ "addCareer","updateCareer", "deleteCareer"]),
         submit() {
-            this.$refs.observer.validate().then(success => {
-                if (
-                    success &&
-                    (this.facultyDto.file || this.facultyDto.imagePath)
-                ) {
-                    var facultyFormData = new FormData();
-                    if (!this.facultyDto.id) {
-                        facultyFormData.append(
-                            "numberOfYear",
-                            this.facultyDto.numberOfYear
-                        );
-                        facultyFormData.append("name", this.facultyDto.name);
-                        facultyFormData.append("file", this.facultyDto.file);
-                        facultyFormData.append(
-                            "universityId",
-                            this.facultyDto.universityId
-                        );
-                    } else {
-                        Object.keys(this.facultyDto).forEach(key => {
-                            facultyFormData.append(key, this.facultyDto[key]);
-                        });
-                    }
+                console.log(this.careerDto.id)
 
-                    this.actionFaculty({
-                        id: this.facultyDto.id,
-                        formData: facultyFormData
+            this.$refs.observer.validate().then(success => {
+                if (success ) {          
+                  if (!this.careerDto.id) {
+                        this.addCareer({
+                            name: this.careerDto.name,
+                            
+                        });  
+                  }else{
+                    this.updateCareer({
+                        id: this.careerDto.id,
+                        name: this.careerDto.name,
+                        
                     });
-                }
+                  } 
+                }  
             });
         },
-        openDialog() {
-            this.$refs.facultieDialog.open();
-        },
+        openDialog(p) {
+          this.$store.commit('Set_Career_Dto', p);
+            this.$refs.careerDialog.open();
+                  },
         search(query) {
             this.$store.commit('Set_Search_Dto', {
                 keys: ['name'],

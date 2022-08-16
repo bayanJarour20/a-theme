@@ -35,28 +35,29 @@ let routes = [
         name: "login",
         component: () => import("@/views/auth/login.vue"),
         meta: () => ({
-          title: "تسجيل الدخول",
+          title: "login account",
+          roles: [All],
+        }),
+        redirectIfLoggedIn: true,
+      },
+      {
+        path: "/signup",
+        name: "signup",
+        component: () => import("@/views/auth/signup.vue"),
+        meta: () => ({
+          title: "new account",
           roles: [All],
         }),
       },
-      // {
-      //   path: "/signup",
-      //   name: "signup",
-      //   component: () => import("@/views/auth/signup.vue"),
-      //   meta: () => ({
-      //     title: "حساب جديد",
-      //     roles: [All],
-      //   }),
-      // },
-      // {
-      //   path: "/forget-password",
-      //   name: "forget-password",
-      //   component: () => import("@/views/auth/forget-password.vue"),
-      //   meta: () => ({
-      //     title: "نسيت كلمة المرور",
-      //     roles: [All],
-      //   }),
-      // },
+      {
+        path: "/forget-password",
+        name: "forget-password",
+        component: () => import("@/views/auth/forget-password.vue"),
+        meta: () => ({
+          title: "نسيت كلمة المرور",
+          roles: [All],
+        }),
+      },
     ],
   },
   {
@@ -107,6 +108,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, _, next) => {
   const isLoggedIn = isUserLoggedIn();
+  
   document.title = !to.meta(to).breadcrumb
     ? !to.meta(to).pageTitle
       ? to.meta(to).title
@@ -118,6 +120,7 @@ router.beforeEach((to, _, next) => {
 
     // If logged in => not authorized
     return next("/access-denied");
+    
   }
   next();
 });

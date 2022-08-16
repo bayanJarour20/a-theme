@@ -2,11 +2,10 @@ import { All } from "..";
 // import { nullGuid } from "@core/util/global/index.js";
 import contentManagement from "./content-managment";
 import settingsRout from "./settingsRout"; 
-import appUser from "./appUser";
 export default [
   {
     path: "",
-    redirect: "/admin/home",
+    redirect: "/login",
   },
   {
     path: "home",
@@ -28,5 +27,4 @@ export default [
   },
   ...contentManagement,
   ...settingsRout,
-  ...appUser,
 ];

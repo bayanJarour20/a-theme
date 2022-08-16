@@ -17,6 +17,7 @@
     </b-container>
 </template>
 <script>
+import { mapState ,mapActions } from 'vuex';
 export default {
     data: () => ({
         projectColumn:[
@@ -103,8 +104,11 @@ export default {
           { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
         ]
     }),
+    computed:{
+      ...mapState({
+            // projectList: state => state.projects.projectList,
+        }),    },
     methods: {
-
         openEditprojectFreeDialog(props) {
             console.log("/admin/projects/details/" + props.row.id)
             this.$router.push(

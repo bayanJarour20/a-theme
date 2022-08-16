@@ -4,9 +4,10 @@
       <a-dialog
         @ok="submit()"
         ref="NotificationsDialog"
-        :placeholder="!isEdit ? 'search for Notifications' : ''"
-        :title="!isEdit ? ' new notification ' : 'edit notification'"
-        :btn_title="!isEdit ? ' new notification ' : ''"
+        placeholder=" search for Notifications"
+        title=" new notification "
+        btn_title=" new notification"
+        @search="search"
       >
         <template #body>
           <a-input-text
@@ -19,6 +20,7 @@
                 message: 'is reqired',
               },
             ]"
+            v-model="notificationDto.title"
           ></a-input-text>
           <a-input-textarea
             label="text notification"
@@ -30,6 +32,7 @@
                 message: 'is reqired',
               },
             ]"
+            v-model="notificationDto.body"
           ></a-input-textarea>
         </template>
       </a-dialog>
@@ -39,6 +42,7 @@
 
 <script>
 import { ValidationObserver } from "vee-validate";
+import { mapState, mapActions } from "vuex";
 
 export default {
   props: {
@@ -49,21 +53,31 @@ export default {
     isEdit: Boolean,
     id: Number,
   },
+  computed:{
+    ...mapState({
+      notificationDto: (state) => state.notifications.notificationDto,
+    }),
+  },
   methods: {
+        ...mapActions(["addNotification", "deleteNotification"]),
+
     submit() {
       this.$refs.observer.validate().then((suc) => {
         if (suc) {
-          console.log(suc);
+          this.addNotification({
+            title: this.notificationDto.title,
+            body: this.notificationDto.body,
+          });
         }
       });
     },
+    search(query) {
+      this.$store.commit("Set_Search_Dto", {
+        keys: ["name"],
+        query,
+      });
+    },
     openDialog() {
-      if (this.isEdit) {
-        // this.advertisingDtoDate =
-        //     this.advertisingDto.startDate +
-        //     " to " +
-        //     this.advertisingDto.endDate;
-      }
       this.$refs.NotificationsDialog.open();
     },
   },

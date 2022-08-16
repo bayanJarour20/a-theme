@@ -7,7 +7,7 @@
             @details="openContactDetails"
             @delete-selected="fireDeleteEvent"
         >
-            <template slot="items.body" slot-scope="{value}">
+            <template slot="items.description" slot-scope="{value}">
               
                 {{value.slice(0, 20)}}....
             </template>
@@ -15,7 +15,7 @@
     </div>
 </template>
 <script>
- import { mapActions } from 'vuex';
+ import { mapActions,mapState} from 'vuex';
 export default {
     data: () => ({
         columns: [
@@ -25,16 +25,16 @@ export default {
             },
             {
                 label: "text",
-                field: "body",
+                field: "description",
                 sortable: false
             },
-            {
-                label: "userName",
-                field: "appUserName"
-            },
+            // {
+            //     label: "userName",
+            //     field: "appUserName"
+            // },
             {
                 label: "sendDate",
-                field: "sendDate"
+                field: "dateCreated"
             },
             {
                 label: "details",
@@ -42,36 +42,20 @@ export default {
                 sortable: false
             }
         ],
-        feedbacks:[
-          {
-            id:3,
-           title:"jjjjj",
-           body:"'iilaa almawqie alhalii: ",
-           appUserName:"Bayan jarour",
-           sendDate:"2022/4/15"
-          },
-          {
-            id:2,
-           title:"kkkk",
-           body:"'iilaa almawqie alhalii: ",
-           appUserName:"Bayan jarour",
-           sendDate:"2022/4/15"
-          },
-          {
-            id:2,
-           title:"kkkk",
-           body:"'iilaa almawqie alhalii: ",
-           appUserName:"Bayan jarour",
-           sendDate:"2022/4/15"
-          }
-        ]
+        
         
     }),
+    computed:{
+    ...mapState({
+      feedbacks: (state) => state.contactUs.feedbacks
+    })
+    },
     created() {
-      this.getFeedbackDetails()
+      this.getAllFeedback(),
+      console.log(this.feedbacks)
     },
     methods: {
-              ...mapActions(["getFeedbackDetails"]),
+              ...mapActions(["getAllFeedback"]),
 
         openContactDetails(props) {
             this.$router.push("contactUs/details/" + props.row.id);

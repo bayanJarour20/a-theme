@@ -62,6 +62,7 @@ export default class JwtService {
                 this.isAlreadyFetchingAccessToken = false;
 
                 // Update accessToken in localStorage
+                
                 this.setToken(r.data.accessToken);
                 this.setRefreshToken(r.data.refreshToken);
 

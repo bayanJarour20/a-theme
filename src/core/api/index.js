@@ -6,6 +6,7 @@ export default {
   post: (
     path,
     body,
+    
     callback = () => {},
     message = { success: "success", error: "error" },
     config = {}
@@ -101,7 +102,7 @@ export default {
     });
     swalWithBootstrapButtons
       .fire({
-        title: "تنبيه!",
+        title: "Attention!",
         text: message.confirm,
         icon: "warning",
         showCancelButton: true,

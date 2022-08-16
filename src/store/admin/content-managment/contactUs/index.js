@@ -4,19 +4,25 @@ export default {
     state: {
         feedbacks: [],
         feedbackDto: {
-            id: "",
-            title: "",
-            body: "",
-            appUserId: "",
-            appUserName: "",
-            reply: "",
-            replyDate: null,
-            sendDate: null
+          id: "",
+          title: "",
+          description: "",
+          dateCreated: "",
+          isResponsed: true,
+          senderId: "",
+          senderName: "",
+          reply: "",
+          replyDate: "",
+          documentDtos: [
+            {
+              id: "",
+              name: "",
+              path: "",
+              type: 1
+            }
+          ]
+        
         },
-        feedbackFilterDto: {
-            body: "",
-
-        }
     },
     mutations: {
         Get_Feedbacks_Details(state, payload) {
@@ -39,30 +45,30 @@ export default {
         }
     },
     actions: {
-        getFeedbackDetails({ commit }) {
+        getAllFeedback({ commit }) {
             api.get("ContactUs/Dash/GetAll", ({ data }) => {
               console.log(data);
                 commit("Get_Feedbacks_Details", data);
             });
         },
         getFeedbackDetail({commit}, id) {
-            api.get('Feedback/Details?id=' + id, ({data}) => {
+            api.get('ContactUs/Dash/GetById?id=' + id, ({data}) => {
                 commit('Feedbacks_Details', data)
             })
         },
         actionFeedback({commit}, payload) {
-            api.put('Feedback/Modify', payload, ({data}) => {
+            api.put('ContactUs/Dash/Response', payload, ({data}) => {
                 if(!payload.id) {
                     commit('Set_Feedback_Dto', data)
                 }
             })
         },
         deleteFeedback(ctx, id) {
-            api.delete("Feedback/Delete?id=" + id, ({ data }) => {
-                if(data) {
-                    router.push('/contact')
+             api.delete("ContactUs/Dash/Delete?id=" + id, ({ data }) => {
+                if (data.isSuccess) {
+                  router.push('/contact')
                 }
-            }, {success: "تم حذف الرسالة بنجاح", error: "فشل حذف الرسالة"});
+            });
         },
     }
 };

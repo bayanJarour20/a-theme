@@ -2,7 +2,7 @@
   <div>
     <b-card no-body class="overflow-hidden">
       <b-card-header class="px-1 py-1 border-bottom">
-         Announcement Add a question
+         {{item.title}}
       </b-card-header>
       <b-card-body class="px-1 py-1">
         <b-img
@@ -14,10 +14,14 @@
           src="~@/assets/images/images.png"
           alt="Image 1"
         ></b-img>
-          <p class="my-4"> Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="my-4">{{item.description}}</p>
         <div class="d-flex justify-content-between">
-          <span> 2022/3/44 </span>
-          <span> 2022/3/44 </span>
+            <span>
+            {{new Date(item.startDate).toLocaleDateString('en-GB')}}
+            </span>
+            <span>
+               {{new Date(item.endDate).toLocaleDateString('en-GB')}}
+            </span>
         </div>
       </b-card-body>
       <b-card-footer class="p-0">

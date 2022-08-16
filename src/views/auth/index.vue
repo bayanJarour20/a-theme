@@ -6,7 +6,7 @@
     <div class="auth-content">
       <nav class="navbar">
         <div>
-          <!-- <b-button
+          <b-button
             class="mr-1 title"
             to="/login"
             v-if="$route.name != 'login'"
@@ -19,7 +19,7 @@
             v-if="$route.name != 'signup'"
             variant="flat-secondary"
             >{{$t('auth.signup.title')}}</b-button
-          > -->
+          >
         </div> 
         <router-link to="/" custom>
           <a-logo-white class="d-lg-none"/>

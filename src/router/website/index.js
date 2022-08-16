@@ -2,6 +2,7 @@ import { All } from "..";
 
 export default [
   {
+    
     path: "",
     component: () => import("@/views/website/pages"),
     children: [

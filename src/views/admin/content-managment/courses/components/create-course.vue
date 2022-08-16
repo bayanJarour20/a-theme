@@ -1,128 +1,116 @@
 <template>
-    <ValidationObserver ref="observer">
-        <b-form>
-            <a-dialog
-                ref="facultieDialog"
-                @ok="submit()"
-                :title="title"
-                :placeholder="!isEdit ? 'Search for a specific course' : ''"
-                :btn_title="!isEdit ? 'new course' : ''"
-                :isEdit="!!facultyDto.id"
-                @delete="deleteFaculty(facultyDto.id)"
-                @search="search"
-            > 
-                <template #body>
-                    <a-input-text
-                        :rules="[
-                            { type: 'required', message: 'اسم المنصة إجباري' }
-                        ]"
-                        label="اسم المنصة"
-                        v-model="facultyDto.name"
-                        placeholder="ادخل اسم المنصة"
-                        name="name"
-                    />
-                    <a-input-select
-                        label="نوع المنصة"
-                        placeholder="اختر نوع لمنصة"
-                        :rules="[
-                            {
-                                type: 'required',
-                                message: 'يجب تحديد حقل نوع المنصة'
-                            }
-                        ]"
-                        :options="university"
-                        name="university"
-                        v-model="facultyDto.universityId"
-                        :clearable="true"
-                    />
-                 
-                  
-                </template>
-            </a-dialog>
-        </b-form>
-    </ValidationObserver>
+  <ValidationObserver ref="observer">
+    <b-form>
+      <a-dialog
+        ref="courseDialog"
+        @ok="submit()"
+        :title="title"
+        :placeholder="!isEdit ? 'Search for a specific course' : ''"
+        :btn_title="!isEdit ? 'new course' : ''"
+        :isEdit="!!courcesDto.id"
+        @delete="deleteCourse(courcesDto.id)"
+        @search="search"
+      >
+        <!-- @open=" this.$store.commit('Reset_Course_Dto', courcesDto.id);" -->
+        <template #body>
+          <a-input-text
+            :rules="[{ type: 'required', message: 'course name is required' }]"
+            label="course name"
+            v-model="courcesDto.name"
+            placeholder="enter course name"
+            name="courseName"
+          />
+          <a-input-select
+            label="course platformType"
+            placeholder="enter course platformType"
+            :rules="[
+              {
+                type: 'required',
+                message: 'course platformType is required',
+              },
+            ]"
+            :options="university"
+            name="platformTypeCourse"
+            v-model="courcesDto.platformType"
+            :clearable="true"
+          />
+        </template>
+      </a-dialog>
+    </b-form>
+  </ValidationObserver>
 </template>
 <script>
+import { ValidationObserver } from "vee-validate";
 
-// import { mapState, mapActions } from "vuex";
+ import { mapState, mapActions } from "vuex";
 export default {
     components: {
-       
+       ValidationObserver
     },
     props: {
         title: {
             type: String,
-            default: () => "إضافة منصة"
+            default: () => "add course"
         },
         isEdit: Boolean
     },
      data: () => ({
-        facultyDto:{
-          id:1,
-          name:"sdsd",
-          universityId:3,
-          numberOfYear:12,
-          imagePath:[]
-            },
+      returnedY:{},
             university:[
               {
                 id:1,
                 name :"xzxz",
 
               },{
-                id:1,
-                name:"xzxz",
+                id:2,
+                name:"dsdkjnskj",
               }
             ]
-    }),  
+    }),
     computed: {
-        // ...mapState({
-        //     facultyDto: state => state.faculties.facultyDto,
-        //     university: state => state.university.universities
-        // })
+        ...mapState({
+            courcesDto: state => state.courses.courcesDto,
+            // university: state => state.university.universities
+        })
     },
     created() {
         // this.fetchUniversity();
     },
     methods: {
-        // ...mapActions(["fetchUniversity", "actionFaculty", "deleteFaculty"]),
+      // fetchUniversity
+         ...mapActions([ "addCourse","updateCourse","deleteCourse"]),
         submit() {
             this.$refs.observer.validate().then(success => {
-                if (
-                    success &&
-                    (this.facultyDto.file || this.facultyDto.imagePath)
-                ) {
-                    var facultyFormData = new FormData();
-                    if (!this.facultyDto.id) {
-                        facultyFormData.append(
-                            "numberOfYear",
-                            this.facultyDto.numberOfYear
-                        );
-                        facultyFormData.append("name", this.facultyDto.name);
-                        facultyFormData.append("file", this.facultyDto.file);
-                        facultyFormData.append(
-                            "universityId",
-                            this.facultyDto.universityId
-                        );
-                    } else {
-                        Object.keys(this.facultyDto).forEach(key => {
-                            facultyFormData.append(key, this.facultyDto[key]);
-                        });
-                    }
-
-                    this.actionFaculty({
-                        id: this.facultyDto.id,
-                        formData: facultyFormData
+                if (success ) {          
+                  if (!this.courcesDto.id) {
+                        this.addCourse({
+                            name: this.courcesDto.name,
+                            platformType: this.courcesDto.platformType,
+                            
+                        });  
+                  }else{
+                    this.updateCourse({
+                        id: this.courcesDto.id,
+                        name: this.courcesDto.name,
+                            platformType: this.courcesDto.platformType,
+                        
                     });
+                  }     
+                  
+                    this.$refs.courseDialog.close();
+                     
                 }
+                
             });
         },
-        openDialog() {
-            this.$refs.facultieDialog.open();
+        openDialog(p) {
+           this.$store.commit('Reset_Course_Dto', p);
+            this.$refs.courseDialog.open();
+            
         },
         search(query) {
             this.$store.commit('Set_Search_Dto', {
-                keys: ['name'],
+                keys: ['name','platformType'],
                 query
             })
         }

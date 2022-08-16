@@ -1,19 +1,30 @@
 <template>
-  <ValidationObserver ref="categoryForm">
+  <ValidationObserver ref="settingForm">
     <a-dialog
-      :title="!isEdit ? 'إضافة اسم المدينة' : 'تعديل اسم المدينة'"
-      :placeholder="!isEdit ? 'بحث اسم المدينة' :''"
-      :btn_title="!isEdit ? 'إضافة اسم المدينة' : ''"
+      :title="!isEdit ? 'add city name' : 'edit city name'"
+      :placeholder="!isEdit ? '' :''"
+      :btn_title="!isEdit ? '' : ''"
       ref="SettingsDialog"
+      @ok="onSubmit()"
+      :isEdit="!!cityDto.id"
+       @delete="deleteCity(cityDto.id)" 
     >
  
       <template #body>
-       <a-input-text label=" اسم المدينة" name="Quetionname" placeholder=" اسم المدينة" :rules="[
+       <a-input-text v-model="cityDto.name" label=" city name" name="city anme" placeholder=" city name" :rules="[
         {
           type: 'required',
-          message: 'is reqired'
+          message: 'city name is reqired'
         }
-      ]"></a-input-text>     
+      ]"></a-input-text>
+      <a-input-select
+                label="country name"
+                placeholder="select country name"
+                :rules="[{type: 'required', message: 'country field must be selected'}]"
+                :options="countryList"
+                name="country"
+                v-model="cityDto.countryId"
+            />     
        
       </template>
      
@@ -23,7 +34,7 @@
 <script>
 import { ValidationObserver } from "vee-validate";
 
-
+import { mapState, mapActions } from 'vuex';
 export default {
   components: {
     ValidationObserver,
@@ -33,13 +44,32 @@ export default {
     isEdit: Boolean,
     id: Number,
   },
-
-  methods: {
-    open() {
-      this.$refs.SettingsDialog.open();
+  computed: {
+        ...mapState({
+            cityDto: state => state.settings.cityDto,
+            countryList: state => state.settings.countryList,
+        })
     },
-    
-  },
-
+    created(){
+      this.getCountryDetails()
+    },
+    methods: {
+        ...mapActions(["createCity", "deleteCity","updateCity","getCountryDetails"]),
+        open(p) {
+            this.$store.commit('Set_City_Dto', p);
+            this.$refs.SettingsDialog.open();
+        },
+        onSubmit() {
+            this.$refs.settingForm.validate().then((success) => {
+                if(success) {
+                  console.log(!this.cityDto.id)
+                  if(!this.cityDto.id){
+                    this.createCity(this.cityDto)
+                  }else
+                     this.updateCity(this.cityDto)
+                }
+            })
+        }
+    }
 };
 </script>

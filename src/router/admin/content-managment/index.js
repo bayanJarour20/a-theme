@@ -287,10 +287,9 @@ export default [
     components: {
       default: () => import("@/views/admin/content-managment/advertising"),
       action: () =>
-        import(
-          "@/views/admin/content-managment/advertising/components/create-facultie.vue"
-        ),
-        
+      import(
+        "@/views/admin/content-managment/advertising/components/create-advertising.vue"
+      ),  
     },
     meta: () => ({
       layout: "vertical",
@@ -312,7 +311,6 @@ export default [
         import(
           "@/views/admin/content-managment/career/components/create-career.vue"
         ),
-        
     },
     meta: () => ({
       layout: "vertical",
@@ -347,5 +345,6 @@ export default [
       ],
     }),
   },
+  
  
 ];

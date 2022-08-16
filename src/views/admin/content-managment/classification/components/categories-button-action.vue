@@ -2,21 +2,25 @@
   <ValidationObserver ref="categoryForm">
     <a-dialog
       :title="title"
-      placeholder="Search for a specific category"
-      btn_title="new category"
-      ref="mainCategoryDialog"
-      @ok="addCategory"
+          ref="mainCategoryDialog"
+          @ok="submit"
+        :placeholder="!isEdit ? 'SSearch for a specific category' : ''"
+        :btn_title="!isEdit ? 'new category' : ''"
+        :isEdit="!!categoryDto.id"
+        
+     @delete="deleteCategory(categoryDto.id)"
     >
       <template slot="activator">
         <slot name="activator"></slot>
       </template>
       <template #body>
-       <a-input-text label="اسم التصنيف الرئيسي" name="Quetionname" placeholder="اسم التصنيف الرئيسي" :rules="[
+       <a-input-text label="category name" name="Quetionname" placeholder="enter category name" :rules="[
         {
           type: 'required',
           message: 'is reqired'
         }
-      ]"></a-input-text>       
+        
+      ]" v-model="categoryDto.name"></a-input-text>       
       </template>
     </a-dialog>
   </ValidationObserver>
@@ -26,6 +30,8 @@ import { ValidationObserver } from "vee-validate";
 
 
 var colors = "#194d33";
+ import { mapState, mapActions } from "vuex";
+
 export default {
   components: {
     ValidationObserver,
@@ -34,41 +40,55 @@ export default {
   data: () => ({
     colors,
   }),
-  computed: {
-    
-  },
   props: {
     title: {
       type: String,
-      default: () => "إضافة تصنيف جديد",
+      default: () => "add new cateqoty",
     },
+        isEdit: Boolean,
+
   },
+  computed: {
+        ...mapState({
+            categoryDto: state => state.category.categoryDto,
+        })
+    },
   methods: {
-   
-    //  search(query) {
-    //         this.$store.commit('Set_Search_Dto', {
-    //             keys: ['name','subCategoriesCount','dateCreated'],
-    //             query
-    //         })
-    //     },
+            ...mapActions([ "addCategory","updateCategory","deleteCategory"]),
     open() {
       this.$refs.mainCategoryDialog.open();
     },
-    addCategory() {
-        console.log(this.categoriesDto);
-      // this.$refs.categoryForm.validate().then((success) => {
-        // if (success && (!!this.categoriesDto.imageDto && (this.categoriesDto.imageDto.base64 || this.categoriesDto.imageDto.path))) {
-          // this.setNewCategories(this.categoriesDto);
-          this.$refs.categoryForm.reset();
-          // this.$store.commit("Reset_Category_Dto");
-        // }
-      // });
-    },
+     submit() {
+            this.$refs.categoryForm.validate().then(success => {
+                if (success ) {    
+                  if (!this.categoryDto.id) {
+                        this.addCategory({   
+                             id: this.categoryDto.id,
+                             name:this.categoryDto.name,
+                             mainCategoryId: null
+                        });  
+
+                  }else{
+                    this.updateCategory({
+                         id: this.categoryDto.id,
+                             name:this.categoryDto.name, 
+                             mainCategoryId: null                 
+                    });
+                  }     
+                  
+                    this.$refs.mainCategoryDialog.close();
+                     
+                }
+               
+                
+            });
+        },
+   
   },
   watch: {
     is(is) {
       if (!is) {
-        // this.$store.commit("Reset_Category_Dto");
+         this.$store.commit("Reset_Category_Dto");
       }
     },
   },

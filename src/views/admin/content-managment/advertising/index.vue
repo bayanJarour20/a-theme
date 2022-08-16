@@ -5,7 +5,8 @@
         cols="12"
         md="6"
         lg="3"
-        
+        v-for="(item, i) in advertisingList"
+        :key="i"
       >
         <component
           @details="deailsAds"
@@ -13,81 +14,21 @@
           :item="item"
         ></component>
       </b-col>
-      <b-col
-        cols="12"
-        md="6"
-        lg="3"
-        
-      >
-        <component
-          @details="deailsAds"
-          :is="advertisingCard + 'Card'"
-          :item="item"
-        ></component>
-      </b-col>
-      <b-col
-        cols="12"
-        md="6"
-        lg="3"
-        
-      >
-        <component
-          @details="deailsAds"
-          :is="advertisingCard + 'Card'"
-          :item="item"
-        ></component>
-      </b-col>
-      <b-col
-        cols="12"
-        md="6"
-        lg="3"
-        
-      >
-        <component
-          @details="deailsAds"
-          :is="advertisingCard + 'Card'"
-          :item="item"
-        ></component>
-      </b-col><b-col
-        cols="12"
-        md="6"
-        lg="3"
-        
-      >
-        <component
-          @details="deailsAds"
-          :is="advertisingCard + 'Card'"
-          :item="item"
-        ></component>
-      </b-col>
-      <b-col
-        cols="12"
-        md="6"
-        lg="3"
-        
-      >
-        <component
-          @details="deailsAds"
-          :is="advertisingCard + 'Card'"
-          :item="item"
-        ></component>
-      </b-col>
-
       <createAdvertising
         ref="editAdvertisingeDialog"
-        title="تعديل الإعلان"
+        title="edi advertising"
         isEdit
       />
-      <b-col cols="12" class="d-flex justify-content-center mb-3">
-        <a-pagination :items="advertising" v-model="activeAdvertising" />
-      </b-col>
+      <!-- <b-col cols="12" class="d-flex justify-content-center mb-3">
+        <a-pagination :items="advertising" v-model="advertisingList" />
+      </b-col> -->
     </b-row>
   </div>
 </template>
 <script>
 const AdvertisingCard = () => import("./components/card-advertising.vue");
-// import { mapActions, mapState, mapGetters } from "vuex";
-import createAdvertising from "./components/create-facultie.vue";
+ import { mapActions, mapState } from "vuex";
+import createAdvertising from "./components/create-advertising.vue";
 
 export default {
   components: {
@@ -95,48 +36,24 @@ export default {
     createAdvertising,
   },
   data: () => ({
-    activeAdvertising: [
-      {
-        id: 1,
-        name: "sdsd",
-        universityId: 3,
-        numberOfYear: 12,
-        imagePath: [],
-      },
-      {
-        id: 1,
-        name: "sdsd",
-        universityId: 3,
-        numberOfYear: 12,
-        imagePath: [],
-      },
-      {
-        id: 1,
-        name: "sdsd",
-        universityId: 3,
-        numberOfYear: 12,
-        imagePath: [],
-      },
-    ],
-    advertising: [],
+ 
     advertisingCard: "Advertising",
-    item:{}
   }),
   computed: {
-    // ...mapState({
-    //     advertisingDto: state => state.advertising.advertisingDto
-    // }),
+    ...mapState({
+        advertisingDto: state => state.advertising.advertisingDto,
+        advertisingList:state => state.advertising.advertisingList
+    }),
     // ...mapGetters(['advertising'])
   },
-  // created() {
-  //     this.getAdvertising();
-  // },
+  created() {
+      this.getAdvertising();
+  },
   methods: {
-    // ...mapActions(["getAdvertising"]),
+     ...mapActions(["getAdvertising"]),
     deailsAds(item) {
-      console.log(item);
-      // Object.assign(this.advertisingDto, item);
-      this.$refs.editAdvertisingeDialog.openDialog();
+       Object.assign(this.advertisingDto, item);
+      this.$refs.editAdvertisingeDialog.openDialog(item);
     },
   },
   beforeDestroy() {

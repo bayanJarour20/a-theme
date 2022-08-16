@@ -53,6 +53,7 @@ export default {
           rememberMe: userDto.rememberMe,
         })
         .then(({ data }) => {
+          console.log(data)
           useJwt.setUserData(JSON.stringify(data))
           useJwt.setToken(data.token)
           useJwt.setRefreshToken(data.refreshToken)
