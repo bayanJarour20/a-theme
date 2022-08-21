@@ -11,15 +11,14 @@ export default {
         },
         searchDto: {
           keys: [],
-          query: ''
-      }
+          query: '' },
+          ids:[],
     },
     mutations: {
         Cources_List(state, payload) {
             state.courcesList = payload;
         },
         Reset_Course_Dto(state, payload) {
-          console.log(payload)
           if (payload) {
               Object.assign(state.courcesDto, {
                 id: payload.id,
@@ -46,8 +45,7 @@ export default {
             state.courcesDto.platformType = payload.platformType;
         },
         Set_Search_Dto(state, payload) {
-          Object.assign(state.searchDto, payload),
-          console.log(state.searchDto)
+          Object.assign(state.searchDto, payload)
       },
         delete_Course_List(state, payload) {
           let MapOfIds = new Map();
@@ -57,9 +55,9 @@ export default {
               MapOfIds.set(payload[idx], 1);
           }
           for (idx = 0; idx < state.courcesList.length; idx++) {
-              if (MapOfIds.has(state.courcesList[idx].id) === false) {
-                  tempList.push(state.courcesList[idx]);
-              }
+            if (MapOfIds.has(state.courcesList[idx].id) === false) {
+              tempList.push(state.courcesList[idx]);
+            }
           }
           state.courcesList = tempList;
       }
@@ -92,11 +90,11 @@ export default {
             });
         },
         deleteAllCourse({commit}, ids) {
-          console.log(ids)
-          api.delete("Course/Dash/DeleteRange" , ids, () => {
-            commit("delete_Course_List", ids);
-
-          });
+          api.delete("Course/Dash/DeleteRange" , ({data})=>{
+            if(data){
+              commit("delete_Course_List", ids);
+            }
+          },{}, ids);
       },
        
     }
