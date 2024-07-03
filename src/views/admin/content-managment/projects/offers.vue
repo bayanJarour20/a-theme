@@ -3,45 +3,17 @@
     <b-row>
       <b-col cols="12" md="12" lg="12">
         <b-button-group class="m-1 mb-2">
-          <b-button variant="primary">Project proposals</b-button>
-          <b-button variant="outline-primary">project comments</b-button>
+          <b-button @click="getAllOffer()" v-on:click=" type = !type" :variant="type ? 'outline-primary' : 'primary'">Project offers</b-button>
+          <b-button @click="getAllComment()" v-on:click=" type = !type" :variant="type ? 'primary' : 'outline-primary'">project comments</b-button>
         </b-button-group>
-        <a-v-datatable
-          :headers="headers"
-          :items="users"
-          classes="borderd cell-borderd striped"
-          v-model="selected"
-          ref="a-v-datatable"
-          
-          :collapseOptoins="collapseOptoins"
-         
+        <a-table
+          no_delete
+          no_select
+          :columns="type ?  headersComment:headers"
+          :items="type ?  offersList:commentList"
+                 
         >
-          <template slot="collapse-icon">
-            <i class="mdi mdi-arrow-down"></i>
-          </template>
-          <template slot="row-td.src" slot-scope="{ row, value }">
-            <img
-              :src="value"
-              width="50"
-              height="50"
-              class="rounded-circle"
-              :alt="row.formatedRow.name"
-            />
-          </template>
-          <template slot="cars.row-td.model" slot-scope="{ value }">
-            <b-badge variant="primary">{{ value }}</b-badge>
-          </template>
-          <template slot="details" slot-scope="{ details }">
-            <b-button size="sm" class="ml-2" @click="details()" variant="info"
-              ><i class="mdi mdi-pen"></i
-            ></b-button>
-          </template>
-          <template slot="remove" slot-scope="{ remove }">
-            <b-button size="sm" variant="danger" @click="remove()"
-              ><i class="mdi mdi-delete"></i
-            ></b-button>
-          </template>
-        </a-v-datatable>             
+        </a-table>             
       </b-col>
       <!-- <createQuestions ref="createQuestions" isEdit />     -->
     </b-row>
@@ -54,121 +26,55 @@ td button{
 
 </style>
 <script>
-import {mapState } from "vuex";
+import {mapState ,mapActions} from "vuex";
 
 export default {
   computed: {
         ...mapState({
-            QuestionsDto: state => state.questions.QuestionsDto
+            offersList: state => state.projects.offersList,
+            commentList: state => state.projects.commentList,
         }),
     },
-    components:{
+    created(){
+      this.getComment(this.id)
     },
   methods: {
-    getDetails(item) {
-            this.row = item;
-
-            // Object.assign(this.QuestionsDto, item);
-           
+    ...mapActions(["getOffer","getComment"]),
+        getAllOffer(){
+          this.getOffer(this.id)
         },
-    addNew() {
-      this.$refs["a-v-datatable"].add(this.newRow);
-    },
-    log(e) {
-      console.log(e);
-    },
+        getAllComment(){
+        this.getComment(this.id)
+        }
+
+  },
+  props:{
+    id:String
   },
   data: () => ({
-    dialogQue:false,
-    selected: [],
-    row: null,
-    newRow: {
-      id: 110,
-      name: "Ervin Howell",
-      username: "Antonette",
-      phone: "010-692-6593 x09125",
-      src: "https://randomuser.me/api/portraits/men/60.jpg",
-      cars: [
-        {
-          id: 1,
-          make: "GMC",
-          model: "Yukon Denali",
-          modelYear: 2016,
-        },
-        {
-          id: 5,
-          make: "Ford",
-          model: "LTD Crown Victoria",
-          modelYear: 1981,
-        },
-      ],
-    },
-    selectOptions: {
-      enable: true,
-    },
-    collapseOptoins: {
-      enable: true,
-      label: "cars",
-      headers: [
-        {
-          label: "",
-          value: "make",
-        },
-        
-      ],
-    },
-    headers: [
-       
+    type:false,
+    headersComment: [    
       {
-        label: "العروض المقدمة للمشروع",
-        value: "name",
+        label: "comment project",
+        field: "text",
       },
-      
     ],
-    users: [
+    headers: [    
       {
-        id: 1,
-        name: "ما هي الرسوم التي يدفعها صاحب المشروع؟",
-        cars: [
-          {
-            id: 1,
-            make: "يدفع صاحب المشروع رسوم وسائل الدفع فقط وهي 2.75% وفي حال قرر العميل إعادة المبالغ التي تم شحنها في حسابه فإننا نقوم بإعادة الرسوم أيضا بشكل تلقائي.",
-          },
-          
-        ],
+        label: "offers project",
+        field: "text",
       },
+    ],
+    offerListList: [
       {
         id: 2,
-        name: "سجلت في مستقل وأضفت مشروعاً ولكنه لم يظهر بعد، لماذا؟",
-        
-        cars: [
-           {
-            id: 3,
-            make: "يدفع صاحب المشروع رسوم وسائل الدفع فقط وهي 2.75% وفي حال قرر العميل إعادة المبالغ التي تم شحنها في حسابه فإننا نقوم بإعادة الرسوم أيضا بشكل تلقائي.",
-          },
-        ],
-      },
+        text: "سجلت في مستقل وأضفت مشروعاً ولكنه لم يظهر بعد، لماذا؟",
+      }
+    ],
+    commentListList: [
       {
         id: 1,
-        name: "ما هي الرسوم التي يدفعها صاحب المشروع؟",
-        cars: [
-          {
-            id: 1,
-            make: "يدفع صاحب المشروع رسوم وسائل الدفع فقط وهي 2.75% وفي حال قرر العميل إعادة المبالغ التي تم شحنها في حسابه فإننا نقوم بإعادة الرسوم أيضا بشكل تلقائي.",
-          },
-          
-        ],
-      },
-      {
-        id: 2,
-        name: "سجلت في مستقل وأضفت مشروعاً ولكنه لم يظهر بعد، لماذا؟",
-        
-        cars: [
-           {
-            id: 3,
-            make: "يدفع صاحب المشروع رسوم وسائل الدفع فقط وهي 2.75% وفي حال قرر العميل إعادة المبالغ التي تم شحنها في حسابه فإننا نقوم بإعادة الرسوم أيضا بشكل تلقائي.",
-          },
-        ],
+        text: "ما هي الرسوم التي يدفعها صاحب المشروع؟",
       },
     ],
   }),

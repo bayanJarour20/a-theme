@@ -58,8 +58,10 @@ export default {
             question: this.commonQuestionDto.question,
             answer: this.commonQuestionDto.answer,
           });
+          this.$refs.QuestionsDialog.close();
         }
       });
+      
     },
     open() {
       if (this.isEdit) {

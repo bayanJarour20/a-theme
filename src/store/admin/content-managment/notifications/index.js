@@ -6,7 +6,9 @@ export default {
       id: "",
       title: "",
       body:"",
+      userIds: [],
     },
+    users:[],
   },
   mutations: {
     Get_Notification_Details(state, payload) {
@@ -22,7 +24,8 @@ export default {
         Object.assign(state.notificationDto, {
           id: "",
           title: "",
-          body:""
+          body:"",
+          userIds: []
         });
       }
     },
@@ -32,6 +35,10 @@ export default {
         1
       );
     },
+    Get_User_Notification(state,payload){
+      state.users = payload;
+
+    }
   },
   actions: {
     getNotificationDetails({ commit }) {
@@ -47,15 +54,21 @@ export default {
     },
     deleteAllNotification({ commit }, ids) {
       console.log(ids)
-      api.delete("Notification/Dash/DeleteRange", ids, () => {
+      api.delete("Notification/Dash/DeleteRange", (data) => {
+        if(data)
         commit("delete_Notification_List", ids);
-      });
+      },{},ids);
     },
     deleteNotification({ commit }, id) {
       api.delete("Notification/Dash/Delete?id=" + id, ({ data }) => {
         if (data) {
           commit("Delete_Notification", id);
         }
+      });
+    },
+    getUserNotification({ commit }) {
+      api.get("Account/App/GetUsers", ({ data }) => {
+        commit("Get_User_Notification", data);
       });
     },
   },

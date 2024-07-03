@@ -1,25 +1,41 @@
-//  import api from "@api";
-// import store from "@/store";
+import api from "@api";
+import router from "@/router";
+
 export default {
   state: {
-      independentDto: {
-          id: 0,
-          name: "",
-          PersonId: "",
-          WorkName:"",
-          AboutHim:"",
-          hisSkills:"",
-          statistics:"",
-          documentation:"",
-          decorations:""
+    userList:[],
+      userDto: {
+        id: "",
+        fullName: "",
+        imagePath: "",
+        bio: "",
+        numOfCompletedProjects: 0,
+        numOfConnections: 0,
+        evalution: 0,
+        cvUrl: "",
+        careerDtos: [],
+        educationDtos: [],
+        serviceDtos: [],
+        workDtos: []
       },
+      worksDto:{
+        id:"",
+        name: "",
+      description: "",
+        link: "",
+        createdDate: "",
+        documentDtos: [],
+        categoryDtos: [],
+        personDtos: []
+
+      }
   },
   mutations: {
-      Set_independent_Dto(state, payload) {
+      Set_user_Dto(state, payload) {
           if (payload) {
-              Object.assign(state.independentDto, payload);
+              Object.assign(state.userDto, payload);
           } else {
-              Object.assign(state.independentDto, {
+              Object.assign(state.userDto, {
                   id: 0,
                   name: "",
                   PersonId: "",
@@ -32,49 +48,38 @@ export default {
               });
           }
       },
-      POS_Details(state, payload) {
-          Object.assign(state.independentDto, payload);
+      Get_User(state, payload) {
+        state.userList = payload;
       },
+      Get_User_Details(state,payload){
+          Object.assign(state.userDto, payload);        
+      },
+      get_Works(state,payload){
+        Object.assign(state.worksDto, payload);        
+
+      }
   },
   actions:{
-      posDetails({ commit }, id) {
-          // api.get("PointOfSale/Details/" + id, ({ data }) => {
-          //     commit("POS_Details", data);
-          // });
-          console.log(id)
-          const data={};
-          Object.assign(data,{
-              id: 0,
-              name: "أحمد تحسين الحسين",
-              PersonId: "",
-              WorkName:"frontEnd",
-              AboutHim:"Material Design Icons' growing icon collection allows designers and developers targeting various platforms to download icons in the format, color and size they need for any project.",
-              hisSkills:"englich,swimming,chesses,ckooking,vue js , ",
-              statistics:[
-                {
-                  Feedback:"التقيمات",
-                  ProjectCompletionRate:"معدل اكمال المشاريع	",
-                  onTimeDeliveryRate:"معدل التسليم بالموعد",
-                  averageResponseSpeed:"متوسط سرعة الرد	",
-                  CompletedProjects:"المشاريع المكتملة	",
-                  ProjectsHeWorksOn:"مشاريع يعمل عليها"
-                }
-              ],
-              documentation:[
-                {
-                  text:"البريد الإلكتروني"
-                },
-                {
-                  text:"الهوية الشخصية"
-                },
-                {
-                  text:"رقم الجوال"
-                },
-              ],
-              decorations:"decoration times,decoratio skilles"
-          })
-          commit("POS_Details", data);
-
-      },
+    getAllUsers({ commit },type) {
+      api.get("Account/Dash/GetUsersByType?type="+type, ({ data }) => {
+        commit("Get_User", data);
+      });
+    },
+    deleteUser(ctx,id){
+      api.delete("Notification/Dash/Delete?id=" + id, ({ data }) => {
+        if (data) {
+          router.push("/admin/user");        }
+      });
+    },
+    getUserDetails({ commit },id) {
+      api.get("Portfolio/App/GetPortfolioById?id="+id, ({ data }) => {
+        commit("Get_User_Details", data);
+      });
+    },
+    getWorks({commit},id){
+      api.get("Work/GetById?id="+id, ({ data }) => {
+        commit("get_Works", data);
+      });
+    }
   }
 }

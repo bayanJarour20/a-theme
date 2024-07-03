@@ -11,13 +11,19 @@
                 <template slot="headers" slot-scope="{props}">
                 {{$t(props.column.label)}}
               </template>
+               <template slot="items.deadLine" slot-scope="{ value }">
+                    {{ new Date(value).toLocaleDateString("en-GB") }}
+                  </template>
+                  <template v-if="!items.nameFreeLancer" slot="items.nameFreeLancer" >
+                    no name freeLancer 
+                  </template>
                 </a-table>
             </b-col>
         </b-row>
     </b-container>
 </template>
 <script>
-import { mapState ,mapActions } from 'vuex';
+import { mapActions, mapState  } from 'vuex';
 export default {
     data: () => ({
         projectColumn:[
@@ -26,24 +32,16 @@ export default {
                 field: "name",
             },
             {
-                label: "projectOwner",
-                field: "nameOwnerProject",
+                label: "nameOwner",
+                field: "nameOwner",
             },
             {
-              label:"userName",
-              field:"nameDepentent"
-            },
-            {
-              label:"ProjectStartDate",
-              field:"dateStartProject"
-            },
-            {
-              label:"deliveryDate",
-              field:"dateEndProject"
+              label:"nameFreeLancer",
+              field:"nameFreeLancer"
             },
             {
               label:"maximumProjectEndDate",
-              field:"dateEndProject"
+              field:"deadLine"
             },
             {
                     label: "details",
@@ -51,35 +49,36 @@ export default {
                     sortable: false
             }
         ],
-        projectList:[
+        projectListList:[
             {
                 id:1,
                 name: "taraphouq",
-                nameOwnerProject: "karolin tooa",
-                nameDepentent:"null",
+                nameOwner: "karolin tooa",
+                nameFreeLancer:"null",
                 dateStartProject:"2022/4/12",
-                dateEndProject:"2022/4/22",
+                deadLine:"2022/4/22",
                 isActive: true, 
             },
             {
                 id:2,
                 name: "mostaquel",
-                nameOwnerProject: "oliver kjlll",
-                nameDepentent:"bayan jarour",
+                nameOwner: "oliver kjlll",
+                nameFreeLancer:"bayan jarour",
                 dateStartProject:"2022/4/12",
-                dateEndProject:"2022/4/22",
+                deadLine:"2022/4/22",
                 isActive: true, 
             },
             {
                 id:3,
                 name: "Olivara",
-                nameOwnerProject: "seleen ajaan",
-                nameDepentent:"woroud alnaab",
+                nameOwner: "seleen ajaan",
+                nameFreeLancer:"woroud alnaab",
                 dateStartProject:"2022/4/12",
-                dateEndProject:"2022/4/22",
+                deadLine:"2022/4/22",
                 isActive: true, 
             },
         ],
+         
          fields: [
           {
             field: 'last_name',
@@ -106,11 +105,14 @@ export default {
     }),
     computed:{
       ...mapState({
-            // projectList: state => state.projects.projectList,
+            projectList: state => state.projects.projectList,
         }),    },
+        created(){
+          this.getProjectDetails()
+        },
     methods: {
+      ...mapActions(["getProjectDetails"]),
         openEditprojectFreeDialog(props) {
-            console.log("/admin/projects/details/" + props.row.id)
             this.$router.push(
                 "/admin/projects/details/" + props.row.id
             );

@@ -11,7 +11,7 @@
           rounded
           style="object-fit: cover"
           class="w-100"
-          src="~@/assets/images/images.png"
+          src="https://cdn.pixabay.com/photo/2016/06/03/13/57/digital-marketing-1433427_960_720.jpg"
           alt="Image 1"
         ></b-img>
           <p class="my-4">{{item.description}}</p>

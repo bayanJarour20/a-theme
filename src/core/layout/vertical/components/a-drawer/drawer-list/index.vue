@@ -1,5 +1,5 @@
 <template>
-<div class="drawer-list-container">
+<div class="drawer-list-container " style="top: auto !important">
   <div class="brand" @click="$router.replace('/')">
       <a-logo-primary width="50"/>
   </div>

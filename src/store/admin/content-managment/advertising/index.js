@@ -8,7 +8,7 @@ export default {
             description: "",
             startDate: "2022/3/4",
             endDate: "2022/3/4",
-            Files:"",
+            Files:[],
             documentDtos: []
           
         },

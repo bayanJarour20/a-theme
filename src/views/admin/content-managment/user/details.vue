@@ -8,7 +8,7 @@
               class="mdi mdi-account-tie text-primary"
               style="margin-left: 10px; margin-top: 4px"
             ></i>
-            DANIEL DEN
+            {{ userDto.fullName }}
           </strong>
         </b-card-header>
         <div>
@@ -16,16 +16,16 @@
             <b-col cols="12" md="6" style="margin: 20px auto">
               <div class="example">
                 <div class="block">
-                  <div class="side -main"></div>
-                  <div class="side -left"></div>
+                  <div class="side -main"  :style="{ 'background-image': 'url(https://i.pravatar.cc/150?img=58)' }"></div>
+                  <div class="side -left" :style="{ 'background-image': 'url(https://i.pravatar.cc/150?img=58)' }"></div>
                 </div>
                 <div class="block">
-                  <div class="side -main"></div>
-                  <div class="side -left"></div>
+                  <div class="side -main" :style="{ 'background-image': 'url(https://i.pravatar.cc/150?img=58)' }"></div>
+                  <div class="side -left" :style="{ 'background-image': 'url(https://i.pravatar.cc/150?img=58)' }"></div>
                 </div>
                 <div class="block">
-                  <div class="side -main"></div>
-                  <div class="side -left"></div>
+                  <div class="side -main" :style="{ 'background-image': 'url(https://i.pravatar.cc/150?img=58)' }"></div>
+                  <div class="side -left" :style="{ 'background-image': 'url(https://i.pravatar.cc/150?img=58)' }"></div>
                 </div>
               </div>
               <b-card-text
@@ -46,11 +46,11 @@
                     margin-bottom: 5px;
                   "
                 >
-                  Daniel Den
+                  {{ userDto.fullName }}
                 </h2>
                 <div
                   class="d-flex py-2"
-                  style="justify-content: space-between; width: 50%"
+                  style="justify-content: space-around; width: 50%"
                 >
                   <div class="d-flex">
                     <i class="mdi mdi-map-marker mr-1 text-primary"></i>
@@ -58,42 +58,28 @@
                   </div>
                   <div>
                     <i class="mdi mdi-card-account-mail mr-1 text-primary"></i>
-                    <label>300</label>
+                    <label>{{ userDto.numOfConnections }}</label>
                     <!-- <i class="mdi mdi-briefcase"></i> -->
                   </div>
-                  <div class="d-flex">
-                    <i class="mdi mdi-account mr-1 text-primary"></i>
-                    <label>independent</label>
+                </div>
+                <div
+                  class="d-flex my-3 justify-center"
+                  
+                >
+                <div v-for="(value, i) in userDto.careerDtos"
+                  :key="i">
+                  <span
+                    class="border p-2 mx-2 border-primary"
+                    style="border-radius: 50%"
+                    >{{ value.name }}</span
+                  >
                   </div>
                 </div>
                 <div class="d-flex my-3 justify-center">
-                  <span
-                    class="border p-2 mx-2 border-primary"
-                    style="border-radius: 50%"
-                    >UI/UX</span
-                  >
-                  <span
-                    class="border p-2 mx-2 border-primary"
-                    style="border-radius: 50%"
-                    >vue</span
-                  >
-                  <span
-                    class="border p-2 mx-2 border-primary"
-                    style="border-radius: 50%"
-                    >React</span
-                  >
-                  <span
-                    class="border p-2 mx-2 border-primary"
-                    style="border-radius: 50%"
-                    >GitHub</span
-                  >
-                </div>
-                <div>
+                  <div v-for="(value, i) in userDto.evalution"
+                  :key="i">
                   <i class="mdi mdi-star text-primary"></i>
-                  <i class="mdi mdi-star text-primary"></i>
-                  <i class="mdi mdi-star text-primary"></i>
-                  <i class="mdi mdi-star text-primary"></i>
-                  <i class="mdi mdi-star text-primary"></i>
+                  </div>
                 </div>
               </b-card-text>
             </b-col>
@@ -108,12 +94,12 @@
             </strong>
           </b-card-header>
           <b-card-body>
-            Front-end developers create the user interface (UI) that determines what each part of a site or application does and how it will look.If someone wanted to build a website, for example, they might hire a front-end developer to create the site's layout. The front-end developer determines where to place images, what the navigation should look like, and how to present the site. Much of their work involves ensuring the appearance and layout of the site or application is easy to navigate and intuitive for the user.
+            {{userDto.bio}}
           </b-card-body>
           <b-card-header>
             <strong>
               <i
-                class="mdi  mdi-sign-real-estate text-primary"
+                class="mdi mdi-sign-real-estate text-primary"
                 style="margin-left: 10px; margin-top: 4px"
               ></i>
               statistics
@@ -125,7 +111,7 @@
                 <b-col cols="12" md="6">
                   <label>
                     Completed Projects
-                    <div class="label-input">14</div>
+                    <div class="label-input">{{userDto.numOfCompletedProjects}}</div>
                   </label>
                 </b-col>
                 <b-col cols="12" md="6">
@@ -140,7 +126,7 @@
           <b-card-header>
             <strong>
               <i
-                class="mdi mdi-briefcase text-primary "
+                class="mdi mdi-briefcase text-primary"
                 style="margin-left: 10px; margin-top: 4px"
               ></i>
               his Works
@@ -148,6 +134,7 @@
           </b-card-header>
           <b-card-body>
             <b-col>
+              <!-- //userDto.workDtos -->
               <a-table
                 :items="projectList"
                 :columns="projectColumn"
@@ -156,13 +143,16 @@
                 <template slot="headers" slot-scope="{ props }">
                   {{ $t(props.column.label) }}
                 </template>
+                <template slot="items.dateCreated" slot-scope="{ value }">
+                {{ new Date(value).toLocaleDateString("en-GB") }}
+            </template>
               </a-table>
             </b-col>
           </b-card-body>
           <b-card-header>
             <strong>
               <i
-                class="mdi mdi-text-box-multiple text-primary "
+                class="mdi mdi-text-box-multiple text-primary"
                 style="margin-left: 10px; margin-top: 4px"
               ></i>
               documentation
@@ -182,9 +172,9 @@
                 >
                   <label style="width: 100%; padding-bottom: 20px"
                     >Mobile number
-                    <div class="label-input">0967456900</div>
+                    <div class="label-input">{{userDto.email}}</div>
                   </label>
-                  <label style="width: 100%; text-align: center">
+                  <!-- <label style="width: 100%; text-align: center">
                     passport photo
                   </label>
                   <div class="tb-affect">
@@ -192,7 +182,7 @@
                       class="b-affect"
                       v-b-modal.modal-center
                       variant="primary"
-                      ><i class="mdi mdi-magnify-plus "></i>
+                      ><i class="mdi mdi-magnify-plus"></i>
                     </b-button>
                   </div>
                   <b-modal
@@ -206,7 +196,7 @@
                       style="width: 100%"
                       src="~@/assets/images/images (1).jpg"
                     ></b-img>
-                  </b-modal>
+                  </b-modal> -->
                 </b-col>
                 <b-col
                   cols="12"
@@ -219,9 +209,9 @@
                 >
                   <label style="width: 100%; padding-bottom: 20px"
                     >E-mail
-                    <div class="label-input">Bayan.jarour20@gmail.com</div>
+                    <div class="label-input">{{userDto.email}}</div>
                   </label>
-                  <label style="width: 100%; text-align: center">
+                  <!-- <label style="width: 100%; text-align: center">
                     ID photo
                   </label>
                   <div class="tb-affect tp-photo">
@@ -231,18 +221,12 @@
                       variant="primary"
                       ><i class="mdi mdi-magnify-plus"></i>
                     </b-button>
-                  </div>
+                  </div> -->
                 </b-col>
-                <label style="width: 100%; padding-bottom: 20px"
-                  >User Addres
-                  <div class="label-input">syria Aleppo</div>
-                </label>
-                <div style="width:100%;">
-                  <a-input-file
-                      label="CV link..."
-                      required
-                      title="Download CV link pdf"
-                    ></a-input-file>
+                <div v-if="!!userDto.cvUrl">
+                <div style="width: 100%">
+                 <div class="label-input">{{userDto.cvUrl}} </div>
+                </div>
                 </div>
               </b-row>
             </b-col>
@@ -250,7 +234,8 @@
         </div>
         <b-card-body style="display: flex; justify-content: space-between">
           <div class="d-flex">
-            <b-button variant="primary"
+            <b-button variant="danger"
+            @click="deleteUser(this.id)"
               >delete<i
                 class="mdi mdi-delete-empty"
                 style="margin-left: 10px; margin-top: 4px"
@@ -264,6 +249,7 @@
             </b-button>
           </div>
           <b-button variant="primary"
+          to="/admin/user"
             >back<i
               class="mdi mdi-arrow-right"
               style="margin-left: 10px; margin-top: 4px"
@@ -287,9 +273,8 @@
   border-radius: 20px;
   width: 100%;
 }
-.tp-photo{
-    background-image: url("~@/assets/images/images (1).jpg")!important;
-
+.tp-photo {
+  background-image: url("~@/assets/images/images (1).jpg") !important;
 }
 .b-affect {
   opacity: 0;
@@ -367,7 +352,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url("https://i.pravatar.cc/150?img=58");
+  /* background-image: url("https://i.pravatar.cc/150?img=58"); */
   background-size: auto 100%;
   box-shadow: -1vw 0.5vw 1vw rgba(0, 0, 0, 0.3);
 }
@@ -414,17 +399,24 @@
 // var loadingTask = pdf.createLoadingTask(
 //   "https://cdn.mozilla.net/pdfjs/tracemonkey.pdf"
 // );
-
+import { mapActions, mapState } from "vuex";
 export default {
-  components: {
+  components: {},
+  computed: {
+    ...mapState({
+      userDto: (state) => state.user.userDto,
+    }),
   },
   data: () => ({
     dialog: true,
     // src: loadingTask,
+    evalution:5,
+    imageValue:"https://i.pravatar.cc/150?img=58",
     numPages: undefined,
     currentPage: 0,
     pageCount: 0,
     previewImage: [],
+   
     values: [
       {
         value: "https://randomuser.me/api/portraits/men/7.jpg",
@@ -438,6 +430,10 @@ export default {
         field: "name",
       },
       {
+        label: "dateCreated",
+        field: "dateCreated",
+      },
+      {
         label: "details",
         field: "details",
         sortable: false,
@@ -447,29 +443,18 @@ export default {
       {
         id: 1,
         name: "taraphouq",
-        nameOwnerProject: "karolin tooa",
-        nameDepentent: "null",
-        dateStartProject: "2022/4/12",
-        dateEndProject: "2022/4/22",
-        isActive: true,
+
+        dateCreated: "2022/4/22",
       },
       {
         id: 2,
         name: "mostaquel",
-        nameOwnerProject: "oliver kjlll",
-        nameDepentent: "bayan jarour",
-        dateStartProject: "2022/4/12",
-        dateEndProject: "2022/4/22",
-        isActive: true,
+        dateCreated: "2022/4/22",
       },
       {
         id: 3,
         name: "Olivara",
-        nameOwnerProject: "seleen ajaan",
-        nameDepentent: "woroud alnaab",
-        dateStartProject: "2022/4/12",
-        dateEndProject: "2022/4/22",
-        isActive: true,
+        dateCreated: "2022/4/22",
       },
     ],
   }),
@@ -481,11 +466,12 @@ export default {
   props: {
     id: String,
   },
+  created() {
+    this.getUserDetails(this.id);
+  },
   methods: {
+    ...mapActions(["getUserDetails","deleteUser"]),
     openEditprojectFreeDialog(props) {
-      console.log(
-        "/admin/user/details/" + this.id + "/WorksUser/" + props.row.id
-      );
       this.$router.push(
         "/admin/user/details/" + this.id + "/WorksUser/" + props.row.id
       );

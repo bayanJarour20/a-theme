@@ -36,6 +36,20 @@ export default {
         1
       );
     },
+    delete_Career_List(state, payload) {
+      let MapOfIds = new Map();
+      var idx;
+      var tempList = [];
+      for (idx = 0; idx < payload.length; idx++) {
+          MapOfIds.set(payload[idx], 1);
+      }
+      for (idx = 0; idx < state.careerList.length; idx++) {
+        if (MapOfIds.has(state.careerList[idx].id) === false) {
+          tempList.push(state.careerList[idx]);
+        }
+      }
+      state.careerList = tempList;
+  }
   },
   actions: {
     getCareerDetails({ commit }) {
@@ -57,9 +71,10 @@ export default {
     },
 
     deleteAllCareer({ commit }, ids) {
-      api.delete("Career/Dash/DeleteRange", ids, () => {
+      api.delete("Career/Dash/DeleteRange", (data) => {
+        if(data)
         commit("delete_Career_List", ids);
-      });
+      },{},ids);
     },
     deleteCareer({ commit }, id) {
       api.delete("Career/Dash/Delete?id=" + id, ({ data }) => {

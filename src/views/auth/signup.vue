@@ -9,18 +9,22 @@
         label="Full Name"
         name="fullname"
         placeholder="type here ..."
+        v-model="AccountDto.fullName"
       ></a-input-text>
       <a-input-text
         label="User Name"
         name="username"
         placeholder="type here ..."
+        v-model="AccountDto.userName"
       ></a-input-text>
       <a-input-text
         label="Password"
         name="password"
         type="password"
         placeholder="type here ..."
+        v-model="AccountDto.Password"
       ></a-input-text>
+
       <a-input-text
         label="Confirm Password"
         name="confirm-password"
@@ -45,7 +49,6 @@ export default {
     }
   }),
   computed: {
-    //  ...mapGetters(['faculties']),
     ...mapState({
       AccountDto: (state) => state.actionSignUp.AccountDto,
     }),
@@ -53,9 +56,10 @@ export default {
   methods: {
     ...mapActions(["sinUp"]),
     signup(userDto) {
+
       console.log(userDto)
-      Object.assign(this.AccountDto, userDto);
-      this.sinUp(userDto)
+      // Object.assign(this.AccountDto, userDto);
+      this.sinUp(this.AccountDto)
     }
   }
 }

@@ -12,12 +12,7 @@
           </strong>
         </b-card-header>
         <b-card-body>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content. Some quick example text to build on the
-          card title and make up the bulk of the card's content. Some quick
-          example text to build on the card title and make up the bulk of the
-          card's content. Some quick example text to build on the card title and
-          make up the bulk of the card's content.
+          {{worksDto.description}}
         </b-card-body>
         <b-card-header>
           <strong>
@@ -30,27 +25,11 @@
         </b-card-header>
         <b-card-body>
           <b-col>
-            <b-row>
-              <b-col cols="12" md="6">
+            <b-row >
+              <b-col cols="12" md="6" v-for="(value, i) in worksDto.categoryDtos"
+                  :key="i">
                 <label style="width: 100%">
-                  <div class="label-input">vue</div>
-                </label>
-                <label style="width: 100%">
-                  <div class="label-input">angular</div>
-                </label>
-                <label style="width: 100%">
-                  <div class="label-input">Bootstrap</div>
-                </label>
-              </b-col>
-              <b-col cols="12" md="6">
-                <label style="width: 100%">
-                  <div class="label-input">vue</div>
-                </label>
-                <label style="width: 100%">
-                  <div class="label-input">js</div>
-                </label>
-                <label style="width: 100%">
-                  <div class="label-input">html</div>
+                  <div class="label-input">{{value.name}}</div>
                 </label>
               </b-col>
             </b-row>
@@ -66,7 +45,7 @@
           </strong>
         </b-card-header>
         <b-card-body>
-          <carousel :perPage="3">
+          <!-- <carousel :perPage="3">
             <slide class="p-2" style="display: flex; justify-content: center;flex-direction: column;    align-items: center;">
               <div class="tb-affect">
                 <b-button
@@ -122,13 +101,13 @@
               </div>
              
             </slide>
-          </carousel>
+          </carousel> -->
           <label style="width: 100%"
                   >project cv
                   <div class="label-input">
                     <a
-                      href="https://stackoverflow.com/questions/65879630/vuetify-storybook-remapinternalicon-issue"
-                      >https://stackoverflow.com/questions/65879630/vuetify-storybook-remapinternalicon-issue</a
+                    :href="worksDto.link"
+                      >{{worksDto.link}}</a
                     >
                   </div>
           </label>
@@ -136,6 +115,7 @@
         <b-card-body style="display: flex; justify-content: space-between">
 
           <b-button variant="primary"
+          to="/admin/user"
             >back<i
               class="mdi mdi-arrow-right"
               style="margin-left: 10px; margin-top: 4px"
@@ -205,22 +185,28 @@
 }
 </style>
 <script>
-import { Carousel, Slide } from "vue-carousel";
-
+// import { Carousel, Slide } from "vue-carousel";
+import {mapActions,mapState} from "vuex"
 export default {
-  components: {
-    Carousel,
-    Slide,
-  },
 
+  computed: {
+    ...mapState({
+      worksDto: (state) => state.user.worksDto,
+    }),
+  },
+  created(){
+    this.getWorks(this.id)
+  },
   data: () => ({
     slide: 0,
     sliding: null,
+    
   }),
   props: {
     id: String,
   },
   methods: {
+    ...mapActions(["getWorks"]),
     completeStep(payload) {
       this.demoSteps.forEach((step) => {
         if (step.name === payload.name) {

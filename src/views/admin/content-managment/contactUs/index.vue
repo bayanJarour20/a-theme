@@ -3,13 +3,15 @@
         <a-table
             :items="feedbacks"
             :columns="columns"
-            selectedLabel="name"
+            selectedLabel="id"
             @details="openContactDetails"
             @delete-selected="fireDeleteEvent"
         >
-            <template slot="items.description" slot-scope="{value}">
-              
+            <template slot="items.description" slot-scope="{value}">            
                 {{value.slice(0, 20)}}....
+            </template>
+            <template slot="items.dateCreated" slot-scope="{value}">            
+              {{ new Date(value).toLocaleDateString("en-GB") }}
             </template>
         </a-table>
     </div>
@@ -55,7 +57,7 @@ export default {
       console.log(this.feedbacks)
     },
     methods: {
-              ...mapActions(["getAllFeedback"]),
+              ...mapActions(["getAllFeedback","deleteAllContact"]),
 
         openContactDetails(props) {
             this.$router.push("contactUs/details/" + props.row.id);
@@ -63,6 +65,7 @@ export default {
        
         fireDeleteEvent(list) {
             console.log(list);
+            this.deleteAllContact(list)
         }
     }
 };

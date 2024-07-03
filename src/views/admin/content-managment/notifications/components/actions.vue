@@ -34,6 +34,22 @@
             ]"
             v-model="notificationDto.body"
           ></a-input-textarea>
+          <a-input-select
+            label="user name"
+            placeholder="select user name"
+            :rules="[
+              {
+                type: 'required',
+                message: 'user name is required',
+              },
+            ]"
+            textLabel="fullName"
+            :options="users"
+            multiple
+            name="notificationUserId"
+            v-model="notificationDto.userIds"
+            :clearable="true"
+          />
         </template>
       </a-dialog>
     </b-form>
@@ -56,10 +72,14 @@ export default {
   computed:{
     ...mapState({
       notificationDto: (state) => state.notifications.notificationDto,
+      users: (state) => state.notifications.users,
     }),
   },
+  created(){
+    this.getUserNotification()
+  },
   methods: {
-        ...mapActions(["addNotification", "deleteNotification"]),
+        ...mapActions(["addNotification", "deleteNotification","getUserNotification"]),
 
     submit() {
       this.$refs.observer.validate().then((suc) => {
@@ -67,6 +87,7 @@ export default {
           this.addNotification({
             title: this.notificationDto.title,
             body: this.notificationDto.body,
+            userIds: this.notificationDto.userIds,
           });
         }
       });

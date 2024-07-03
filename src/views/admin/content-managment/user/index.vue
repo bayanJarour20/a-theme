@@ -1,115 +1,101 @@
 <template>
-    <b-container>
-        <b-row>
-            <b-col cols="12" md="12" lg="12">
-                <a-table   
-                    :items="personList"
-                    :columns="personColumn"
-                     @details="openEditPersonFreeDialog"
-                >
-                <template slot="headers" slot-scope="{props}">
-                {{$t(props.column.label)}}
-              </template>
-              <template slot="items.src" slot-scope="{value}">
-                <img :src="value" width="50" height="50" class="rounded-circle" alt="">
-              </template>
-                </a-table>
-            </b-col>
-        </b-row>
-    </b-container>
+  <b-container>
+    <b-row>
+      <b-col cols="12" md="12" lg="12">
+        <b-button-group class="m-1 mb-2">
+          <b-button
+            to="/admin/dashUser"
+            v-on:click=" typeColor = !typeColor"
+             @click="getAllUsers(2)"
+            :variant="typeColor ? 'outline-primary' : 'primary'"
+            >Dash user</b-button
+          >
+          <b-button
+            to="/admin/user"
+            v-on:click=" typeColor = !typeColor"
+            @click="getAllUsers(3)"
+            :variant="typeColor ? 'primary' : 'outline-primary'"
+            >user</b-button
+          >
+        </b-button-group>
+        <a-table
+          :items="userList"
+          :columns="personColumn"
+          @details="openEditPersonFreeDialog"
+        >
+          <template slot="headers" slot-scope="{ props }">
+            {{ $t(props.column.label) }}
+          </template>
+          <template slot="items.dateCreated" slot-scope="{ value }">
+            {{ new Date(value).toLocaleDateString("en-GB") }}
+          </template>
+          <template slot="items.imagePath" slot-scope="{ value }">
+            <img
+                src="https://randomuser.me/api/portraits/men/6.jpg"
+              width="50"
+              height="50"
+              class="rounded-circle"
+              alt=""
+            />
+          </template>
+        </a-table>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 <script>
-export default {
-    data: () => ({
-        personColumn:[
-            {
-              label: "UserPhoto",
-              field: "src",
-              sortable: false
-            },
-            {
-                label: "UserName",
-                field: "name",
-            },
-            {
-              label:"UserCategory",
-              field:"categoryName"
-            },
-            {
-                label: "UserWork",
-                field: "work",
-            },
-            {
-              label:"UserCity",
-              field:"Hiscity"
-            },
-            {
-                    label: "details",
-                    field: "details",
-                    sortable: false
-            }
-        ],
-        personList:[
-            {
-                id:1,
-                 src: "https://randomuser.me/api/portraits/men/6.jpg",
-                name: "Elina joee",
-                categoryName:"independent",
-                work: "frontEnd",
-                Hiscity:"londn",
-                isActive: true, 
-            },
-            {
-                id:2,
-                src: "https://randomuser.me/api/portraits/men/7.jpg",
-                name: "karolin joee",
-                categoryName:"project owner",
-                work: "BackEnd",
-                Hiscity:"londn",
-                isActive: true, 
-            },
-            {
-                id:3,
-                src: "https://randomuser.me/api/portraits/men/7.jpg",
-                name: "Olivar joee",
-                categoryName:"independent and project owner",
-                work: "Flatter",
-                Hiscity:"LEBANON",
-                isActive: true, 
-            },
-        ],
-         fields: [
-          {
-            field: 'last_name',
-            sortable: true
-          },
-          {
-            field: 'first_name',
-            sortable: false
-          },
-          {
-            field: 'age',
-            label: 'Person age',
-            sortable: true,
-            // Variant applies to the whole column, including the header and footer
-            variant: 'danger'
-          }
-        ],
-        items: [
-          { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-          { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-          { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
-        ]
-    }),
-    methods: {
+import { mapActions, mapState } from "vuex";
 
-        openEditPersonFreeDialog(props) {
-            console.log("/admin/user/details/" + props.row.id)
-            this.$router.push(
-                "/admin/user/details/" + props.row.id
-            );
-        },
-    }
-}
+export default {
+  data: () => ({
+    personColumn: [
+      {
+        label: "imagePath",
+        field: "imagePath",
+        sortable: false,
+      },
+      {
+        label: "fullName",
+        field: "fullName",
+      },
+      {
+        label: "UserCity",
+        field: "cityName",
+      },
+      {
+        label: "dateCreated",
+        field: "dateCreated",
+      },
+      {
+        label: "details",
+        field: "details",
+        sortable: false,
+      },
+    ],
+
+    type: Number,
+    typeColor: Boolean,
+  }),
+  methods: {
+    ...mapActions(["getAllUsers"]),
+    openEditPersonFreeDialog(props) {
+      this.$router.push("/admin/user/details/" + props.row.id);
+    },
+    getDashUser() {
+      this.type = 2;
+    },
+    getUser() {
+      this.type = 3;
+    },
+  },
+
+  computed: {
+    ...mapState({
+      userList: (state) => state.user.userList,
+    }),
+  },
+  created() {
+    this.getAllUsers(3);
+  },
+};
 </script>

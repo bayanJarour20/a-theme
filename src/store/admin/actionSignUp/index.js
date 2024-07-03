@@ -1,4 +1,5 @@
 import api from "@api";
+import router from "@router";
 export default {
   state: {
    
@@ -6,12 +7,7 @@ export default {
       id:"",
       fullName: "",
       userName: "",
-      email: "",
-      phoneNumber: "",
       password: "",
-      cityId: "",
-      address: "",
-      bDay: "",
       userType: 1
     },
   },
@@ -42,6 +38,7 @@ export default {
     sinUp({ commit }, payload) {
       console.log(payload);
       api.post("/Account/Create", payload, ({ data }) => {
+        router.push("/admin/user");
         commit("Create_Account", data);
       });
     },

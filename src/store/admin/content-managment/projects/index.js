@@ -13,19 +13,38 @@ export default {
       minPrice: 0,
       maxPrice: 0
     },
+    offersList:[],
+    commentList:[],
   },
   mutations: {
     Get_Project(state, payload) {
       state.projectList = payload;
     },
     Get_Project_Details(state,payload){
-      state.projectDto = payload;
+      Object.assign(state.projectDto, payload);
+    },
+    Get_Offer(state, payload){
+      state.offersList = payload;
+    },
+    Get_Comment(state, payload){
+      state.commentList = payload;
     }
   },
   actions: {
-    getProjectDetails({ commit },id) {
-      api.get("GetServices?categoryId="+id, ({ data }) => {
+    getProjectDetails({ commit }) {
+      api.get("Service/Dash/GetAll?type=1", ({ data }) => {
+        console.log(data)
         commit("Get_Project", data);
+      });
+    },
+    getOffer({ commit },id) {
+      api.get("Offer/Dash/GetCommentsByServiceId?serviceId="+ id, ({ data }) => {
+        commit("Get_Offer", data);
+      });
+    },
+    getComment({ commit },id){
+      api.get("Comment/App/GetCommentsByServiceId?serviceId="+ id, ({ data }) => {
+        commit("Get_Comment", data);
       });
     },
     getProjectDetailsGetByID({commit},id){

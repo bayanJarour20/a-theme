@@ -7,6 +7,7 @@ export default {
             name: "",
             universityId: ""
         },
+        ids:[]
     },
     mutations: {
         Get_Faculties_Details(state, payload) {
@@ -39,7 +40,21 @@ export default {
                 state.facultiesList.findIndex(item => item.id == id),
                 1
             );
-        }
+        },
+        delete_Faculty_List(state, payload) {
+          let MapOfIds = new Map();
+          var idx;
+          var tempList = [];
+          for (idx = 0; idx < payload.length; idx++) {
+              MapOfIds.set(payload[idx], 1);
+          }
+          for (idx = 0; idx < state.facultiesList.length; idx++) {
+            if (MapOfIds.has(state.facultiesList[idx].id) === false) {
+              tempList.push(state.facultiesList[idx]);
+            }
+          }
+          state.facultiesList = tempList;
+      }
     },
     actions: {
         getFacultiesDetails({ commit }) {
@@ -60,10 +75,11 @@ export default {
               }
         },
         deleteAllFaculty({commit}, ids) {
-          api.delete("Faculty/Dash/DeleteRange" , ids, () => {
+          api.delete("Faculty/Dash/DeleteRange" , (data) => {
+            if (data)
             commit("delete_Faculty_List", ids);
 
-          });
+          },{},ids);
         },
         deleteFaculty({ commit }, id) {
             api.delete("Faculty/Dash/Delete?id=" + id, ({ data }) => {

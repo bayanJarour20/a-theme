@@ -4,7 +4,7 @@
       :title="title"
           ref="mainCategoryDialog"
           @ok="submit"
-        :placeholder="!isEdit ? 'SSearch for a specific category' : ''"
+        :placeholder="!isEdit ? 'Search for a specific category' : ''"
         :btn_title="!isEdit ? 'new category' : ''"
         :isEdit="!!categoryDto.id"
         

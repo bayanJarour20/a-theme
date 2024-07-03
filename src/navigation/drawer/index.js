@@ -3,12 +3,12 @@ export default [
   {
     header: "menu",
   },
-  {
-    title: "home",
-    to: "/admin/home",
-    icon: "home",
-    roles: [All],
-  },
+  // {
+  //   title: "home",
+  //   to: "/admin/home",
+  //   icon: "home",
+  //   roles: [All],
+  // },
   {
     header: "content-mangment",
   },

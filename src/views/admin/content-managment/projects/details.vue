@@ -8,16 +8,11 @@
               class="mdi mdi-subtitles-outline"
               style="margin-left: 10px; margin-top: 4px"
             ></i>
-            Rivira
+            {{projectDto.name}}
           </strong>
         </b-card-header>
         <b-card-body>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content. Some quick example text to build on the
-          card title and make up the bulk of the card's content. Some quick
-          example text to build on the card title and make up the bulk of the
-          card's content. Some quick example text to build on the card title and
-          make up the bulk of the card's content.
+          {{projectDto.description}}
         </b-card-body>
         <b-card-header>
           <strong>
@@ -33,38 +28,27 @@
             <b-row>
               <b-col cols="12" md="6">
                 <label style="width: 100%"
+                v-if="!!projectDto.averageOfPrice"
                   >the Range
-                  <div class="label-input">100$</div>
-                </label>
-                <label style="width: 100%">
-                  execution time
-                  <div class="label-input">8 days</div>
+                  <div class="label-input">{{projectDto.averageOfPrice}}</div>
                 </label>
                 <label style="width: 100%"
-                  >projectOwner
-                  <div class="label-input">seleen ajaan</div>
+                  >nameOwner
+                  <div class="label-input">{{projectDto.nameOwner}}</div>
                 </label>
                 <label style="width: 100%">
-                  projectUser
-                  <div class="label-input">bayan jarour</div>
+                  nameFreeLancer
+                  <div class="label-input">{{!projectDto.nameFreeLancer?'no name freeLancer':projectDto.nameFreeLancer}}</div>
                 </label>
               </b-col>
               <b-col cols="12" md="6">
                 <label style="width: 100%"
                   >Number of offers
-                  <div class="label-input">14</div>
-                </label>
-                <label style="width: 100%">
-                  project start date
-                  <div class="label-input">2022/4/12</div>
-                </label>
-                <label style="width: 100%">
-                   delivery date
-                  <div class="label-input">2022/4/12</div>
+                  <div class="label-input">{{projectDto.numOfOffer}}</div>
                 </label>
                 <label style="width: 100%">
                   maximum project end date
-                  <div class="label-input">2022/4/12</div>
+                  <div class="label-input">{{ new Date(projectDto.deadLine).toLocaleDateString("en-GB")}}</div>
                 </label>
               </b-col>
             </b-row>
@@ -82,28 +66,14 @@
         <b-card-body>
           <b-col>
             <b-row>
-              <b-col cols="12" md="6">
+              <b-col cols="12" md="6" v-for="(value, index) in projectDto.categoryDtos"
+                :key="index">
                 <label style="width: 100%">
-                  <div class="label-input">vue</div>
+                  <div class="label-input">{{value.name}}</div>
                 </label>
-                <label style="width: 100%">
-                  <div class="label-input">angular</div>
-                </label>
-                <label style="width: 100%">
-                  <div class="label-input">Bootstrap</div>
-                </label>
+                
               </b-col>
-              <b-col cols="12" md="6">
-                <label style="width: 100%">
-                  <div class="label-input">vue</div>
-                </label>
-                <label style="width: 100%">
-                  <div class="label-input">js</div>
-                </label>
-                <label style="width: 100%">
-                  <div class="label-input">html</div>
-                </label>
-              </b-col>
+              
             </b-row>
           </b-col>
         </b-card-body>
@@ -139,7 +109,7 @@
               >
                 <b-img
                   style="width: 100%"
-                  src="https://i.pravatar.cc/150?img=58"
+                  src="~@/assets/images/download (1).jpg"
                 ></b-img>
               </b-modal>
             </slide>
@@ -150,12 +120,23 @@
               <div class="tb-affect">
                 <b-button
                   class="b-affect"
-                  v-b-modal.modal-center
+                  v-b-modal.modal-centerr
                   variant="primary"
                   ><i class="mdi mdi-plus"></i>
                 </b-button>
               </div>
-              
+              <b-modal
+                id="modal-centerr"
+                centered
+                :hide-footer="true"
+                :hide-header="true"
+                style="padding: 0px"
+              >
+                <b-img
+                  style="width: 100%"
+                  src="~@/assets/images/download (1).jpg"
+                ></b-img>
+              </b-modal>
             </slide>
             <slide class="p-2" style="display: flex; justify-content: center;flex-direction: column;    align-items: center;">
               <label style="width: 100%; text-align: center">
@@ -228,7 +209,7 @@
             ></b-button>
           </div>
           <b-button variant="primary"
-          to="admin/projects"
+          to="/admin/projects"
             >back<i
               class="mdi mdi-arrow-right"
               style="margin-left: 10px; margin-top: 4px"
@@ -324,7 +305,7 @@ hr {
 </style>
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import {mapState} from "vuex"
+import {mapState,mapActions} from "vuex"
 export default {
   components: {
     Carousel,
@@ -338,7 +319,11 @@ export default {
   props: {
     id: String,
   },
+  created(){
+    this.getProjectDetailsGetByID(this.id)
+  },
   methods: {
+    ...mapActions(["getProjectDetailsGetByID"]),
     completeStep(payload) {
       this.demoSteps.forEach((step) => {
         if (step.name === payload.name) {
@@ -363,7 +348,7 @@ export default {
     },
     offerProject() {
       console.log("/admin/projects/details/" + this.id);
-      this.$router.push("/admin/projects/details/" + this.id + "/offers");
+      this.$router.push("/admin/projects/details/" + this.id + "/offers/"+ this.id);
     },
     onSlideStart(slide) {
       this.sliding = true;

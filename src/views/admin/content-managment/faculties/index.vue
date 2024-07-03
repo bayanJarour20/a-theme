@@ -3,7 +3,7 @@
         <a-table
             :items="facultiesList"
             :columns="columns"
-            selectedLabel="name"
+            selectedLabel="id"
             @details="openEditFaculityDialog"
             @delete-selected="fireDeleteEventFaculity"
         >

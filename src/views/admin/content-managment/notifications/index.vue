@@ -26,7 +26,7 @@
         </b-button>
       </b-card-header>
     </b-card>
-    <div v-for="(notifiactions, index) in notificationListLIst"
+    <div v-for="(notifiactions, index) in notificationList"
                 :key="index">
       <b-card no-body class="mb-1 my-3">
         <b-card-header
@@ -87,7 +87,8 @@ export default {
   },
   methods:{
      toggleAll(checked) {
-        this.selected = checked ? this.notificationListLIst.map(n => n.id).slice() : []      },
+        this.selected = checked ? this.notificationList.map(n => n.id).slice() : []   
+        console.log(this.selected)   },
      ...mapActions(["getNotificationDetails","deleteAllNotification"]),
     getDetails(item) {
             console.log(item)

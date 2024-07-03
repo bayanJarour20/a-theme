@@ -64,5 +64,5 @@ export const getHomeRouteForLoggedInUser = () => {
   const userRole = currentUserRole()
   console.log(userRole)
   if (userRole === Admin) return "/admin";
-  return "/admin/home";
+  return "/admin/user";
 };

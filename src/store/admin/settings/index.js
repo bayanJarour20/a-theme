@@ -181,7 +181,7 @@ export default {
         commit("Get_City_Details", data);
       });
     },
-    updateSetting({commit},payload) {
+    updateSetting(ctx,payload) {
       console.log(payload)
       api.put("Setting/Dash/Update", payload, ({ data }) => {
         console.log(data)
@@ -209,9 +209,10 @@ export default {
     },
     deleteAllUniversity({ commit }, ids) {
       console.log(ids)
-      api.delete("University/Dash/DeleteRang", ids, () => {
+      api.delete("University/Dash/DeleteRange", (data) => {
+        if (data)
         commit("delete_University_List", ids);
-      });
+      },{},ids);
     },
     getUniveristyDetails({ commit }) {
       api.get("University/GetAll", ({ data }) => {
@@ -236,9 +237,10 @@ export default {
     
     deleteAllCountry({ commit }, ids) {
       console.log(ids)
-      api.delete("Country/Dash/DeleteRang", ids, () => {
+      api.delete("Country/Dash/DeleteRange", (data) => {
+        if(data)
         commit("delete_Country_List", ids);
-      });
+      },{},ids);
     },
     createCity({ commit }, payload){
       console.log(payload)
@@ -258,9 +260,10 @@ export default {
     },
     deleteAllCity({ commit }, ids) {
       console.log(ids)
-      api.delete("City/Dash/DeleteRang", ids, () => {
+      api.delete("City/Dash/DeleteRange", (data) => {
+        if(data)
         commit("delete_City_List", ids);
-      });
+      },{},ids);
     },
     
   },

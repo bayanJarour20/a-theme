@@ -42,7 +42,21 @@ export default {
                 state.facultyDto,
                 payload
             )
-        }
+        },
+        delete_Contact_List(state, payload) {
+          let MapOfIds = new Map();
+          var idx;
+          var tempList = [];
+          for (idx = 0; idx < payload.length; idx++) {
+              MapOfIds.set(payload[idx], 1);
+          }
+          for (idx = 0; idx < state.feedbacks.length; idx++) {
+            if (MapOfIds.has(state.feedbacks[idx].id) === false) {
+              tempList.push(state.feedbacks[idx]);
+            }
+          }
+          state.feedbacks = tempList;
+      }
     },
     actions: {
         getAllFeedback({ commit }) {
@@ -57,7 +71,7 @@ export default {
             })
         },
         actionFeedback({commit}, payload) {
-            api.put('ContactUs/Dash/Response', payload, ({data}) => {
+            api.post('ContactUs/Dash/Response', payload, ({data}) => {
                 if(!payload.id) {
                     commit('Set_Feedback_Dto', data)
                 }
@@ -69,6 +83,13 @@ export default {
                   router.push('/contact')
                 }
             });
+        },
+        deleteAllContact({commit}, ids) {
+          api.delete("ContactUs/Dash/DeleteRange" , (data) => {
+            if (data)
+            commit("delete_Contact_List", ids);
+
+          },{},ids);
         },
     }
 };

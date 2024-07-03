@@ -60,6 +60,7 @@
       <b-col cols="12" md="4">
         <a-table
           isPlus
+          title="city"
           :columns="columns"
           :items="cityList"
           @details="openEditCityDialog"
@@ -75,6 +76,7 @@
       </b-col>
       <b-col cols="12" md="4">
         <a-table
+        title="university"
           :items="universityList"
           :columns="universitiesColumn"
           isPlus
@@ -88,12 +90,13 @@
       <b-col cols="12" md="4">
         <a-table
           :items="countryList"
-          :columns="universitiesColumn"
+          title="country"
+          :columns="countryColumn"
           isPlus
           @plus="setCountryDialogFormPlus()"
           @details="setCountryDialogForm"
           selectedLabel="id"
-          @delete-selected="delteAllIndexUni"
+          @delete-selected="delteAllIndexCountry"
         >
         </a-table>
       </b-col>
@@ -135,6 +138,18 @@ export default {
         sortable: false,
       },
     ],
+    countryColumn: [
+      {
+        label: "countryName",
+        field: "name",
+      },
+      {
+        label: "details",
+        field: "details",
+        sortable: false,
+      },
+    ],
+
  
   }),
   components: {
@@ -158,7 +173,7 @@ export default {
       this.getUniveristyDetails();
   },
   methods: {
-    ...mapActions(["updateSetting","getCityDetails","getSettingDetails","getUniveristyDetails","deleteAllUniversity","deleteAllCity"]),
+    ...mapActions(["updateSetting","getCityDetails","getSettingDetails","deleteAllCountry","getUniveristyDetails","deleteAllUniversity","deleteAllCity"]),
     setUniversityDialogForm(props) {
       this.isEdit = true;
       this.$refs.universityDialog.open(props.row);
@@ -191,6 +206,9 @@ export default {
     },
     delteAllIndexUni(ids){
       this.deleteAllUniversity(ids)
+    },
+    delteAllIndexCountry(ids){
+      this.deleteAllCountry(ids)
     },
     delteAllIndexCity(ids){
       this.deleteAllCity(ids)

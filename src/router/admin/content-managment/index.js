@@ -9,12 +9,37 @@ export default [
       action: () =>
         import("@/views/admin/content-managment/user/components/actions"),
     },
+    props: {
+      default: true
+      },
     meta: () => ({
       layout: "vertical",
       roles: [All],
       breadcrumb: [
         {
           text: "user",
+          active: true,
+        },
+      ],
+    }),
+  },
+  {
+    path: "dashUser",
+    name: "admin dash user",
+    components: {
+      default: () => import("@/views/admin/content-managment/user"),
+      action: () =>
+        import("@/views/admin/content-managment/user/components/actions"),
+    },
+    props: {
+      default: true
+      },
+    meta: () => ({
+      layout: "vertical",
+      roles: [All],
+      breadcrumb: [
+        {
+          text: "dash user",
           active: true,
         },
       ],
@@ -129,7 +154,7 @@ export default [
     }),
   },
   {
-    path: "projects/details/:id/offers",
+    path: "projects/details/:id/offers/:id",
     name: "projects details offers",
     components: {
       default: () =>

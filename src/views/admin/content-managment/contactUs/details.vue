@@ -80,7 +80,7 @@
                         <b-col>
                             <div class="d-flex">
                                 <b-button
-
+                                v-if="!feedbackDto.replyDate"
                                     class="mr-1"
                                     type="submit"
                                     variant="primary"
@@ -127,14 +127,10 @@ export default {
         this.getFeedbackDetail(this.id);
     },
     data: () => ({
-        // feedbackDto:{
-        //   senderName:"Bayn Jarour",
-        //   dateCreated:"12/12/2",
-        //   replyDate:"",
-        //   title:"jjjjj",
-        //   description:"ghayr maelum (fi alwaedi) NavigationDuplicated: tajanub altanaqul alzaayid 'iilaa almawqie alhalii: ",
-        //   reply:"",
-        // }
+      replayDto:{
+        id:"",
+        reply:""
+      }
     }),
      components: {
        ValidationObserver
@@ -150,10 +146,12 @@ export default {
       ...mapActions(["getFeedbackDetail","actionFeedback","deleteFeedback"]),
         onSubmit() {
             this.$refs.observer.validate().then(success => {
+
                 if (success) {
-                    this.feedbackDto.id = this.id;
                     this.feedbackDto.replyDate = new Date();
-                    this.actionFeedback(this.feedbackDto);
+                    this.replayDto.id = this.id;
+                    this.replayDto.reply = this.feedbackDto.reply;
+                    this.actionFeedback(this.replayDto);
                 }
             });
         },

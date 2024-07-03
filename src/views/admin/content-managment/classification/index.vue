@@ -3,7 +3,7 @@
     <a-table
       :items="categoryList"
       :columns="columns"
-      selectedLabel="name"
+      selectedLabel="id"
       @details="openCategoriesDetails"
       @delete-selected="fireDeleteEvent"
     >
@@ -46,7 +46,7 @@
           class="mb-3"
           :items="subCategoryList"
           :columns="subColumns"
-          selectedLabel="name"
+          selectedLabel="id"
           @details="openEditSubCategoryDialog"
           @delete-selected="fireDeleteEvent"
         > 
@@ -151,7 +151,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getCategoryDetails","getSubCategory"]),
+    ...mapActions(["getCategoryDetails","getSubCategory","deleteAllCategory"]),
     openCategoriesDetails(props) {
         if (props.row.id != this.id) {
           Object.assign(this.categoryDto, props.row);
@@ -184,6 +184,7 @@ export default {
     },
     fireDeleteEvent(list) {
       console.log(list);
+      this.deleteAllCategory(list)
     },
   },
   beforeDestroy() {

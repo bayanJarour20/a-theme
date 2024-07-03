@@ -66,7 +66,7 @@ export default {
   get: (
     path,
     callback = () => {},
-    message = { error: "خطأ في جلب البيانات" }
+    message = { error: "error in data" }
   ) => {
     axiosIns
       .get(path)

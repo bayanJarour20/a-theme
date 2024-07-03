@@ -10,7 +10,6 @@
           <a-table
             :items="projectList"
             :columns="projectColumn"
-            @details="openEditprojectFreeDialog"
           >
             <template slot="headers" slot-scope="{ props }">
               {{ $t(props.column.label) }} 
@@ -41,11 +40,6 @@ export default {
       {
         label: "Project end date",
         field: "dateEndProject",
-      },
-      {
-        label: "details",
-        field: "details",
-        sortable: false,
       },
     ],
     projectList: [
@@ -78,6 +72,6 @@ export default {
       },
     ],
   }),
-  
+
 }
 </script>

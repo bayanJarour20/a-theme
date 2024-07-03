@@ -54,8 +54,7 @@ export default {
     methods: {
          ...mapActions([ "addCareer","updateCareer", "deleteCareer"]),
         submit() {
-                console.log(this.careerDto.id)
-
+            console.log(this.careerDto.id)
             this.$refs.observer.validate().then(success => {
                 if (success ) {          
                   if (!this.careerDto.id) {
@@ -71,6 +70,7 @@ export default {
                     });
                   } 
                 }  
+                 this.$refs.careerDialog.close();
             });
         },
         openDialog(p) {

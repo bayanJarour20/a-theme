@@ -51,7 +51,6 @@
           >
           </a-input-datepicker>
           <a-input-datepicker
-            :state="faildRules"
             required
             :rules="[
               {
@@ -67,6 +66,7 @@
           </a-input-datepicker>
 
           <a-input-file
+          multiple
             label="advertising image"
             required
             title="advertising image"
@@ -161,7 +161,7 @@ export default {
                     });
                     }
 
-                    
+                    this.$refs.advertisingDialog.close();
                     this.closeDialog();
                 }
             });
